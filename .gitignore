@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
+
+# Node
+node_modules/
+.next/
+dist/
+
+# Env / local
+.env
+.env.local
+
+# Temporary scratch files
+.tmp-*.json
+
+# Nested repo
+hello-agents/
+
+# Data and logs
+*.log
+data/
+tmp/
+
+# IDE
+.vscode/
+.idea/
