@@ -1,12 +1,12 @@
 :root {
-  --bg: #f6f3ea;
-  --bg-deep: #efe7d8;
-  --ink: #22201c;
-  --ink-soft: #6a6256;
-  --panel: #fffdfa;
-  --line: #dfd3bf;
-  --accent: #925f2f;
-  --accent-soft: #f2e4d3;
+  --bg: #f8f1e2;
+  --bg-deep: #ead8bc;
+  --ink: #2d2015;
+  --ink-soft: #75614c;
+  --panel: #fffaf1;
+  --line: #d8c19e;
+  --accent: #8f4f20;
+  --accent-soft: #f3e5cf;
   --ok: #2f7a44;
   --warn: #a96f00;
   --error: #af2a1b;
@@ -19,9 +19,12 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: radial-gradient(circle at 0% 0%, var(--bg-deep) 0, var(--bg) 35%);
+  background:
+    radial-gradient(circle at 12% -2%, rgba(190, 145, 89, 0.22) 0, transparent 28%),
+    radial-gradient(circle at 88% 0%, rgba(148, 96, 52, 0.18) 0, transparent 26%),
+    linear-gradient(180deg, #fff7eb 0%, var(--bg) 48%, #f2e5cf 100%);
   color: var(--ink);
-  font-family: "Noto Serif SC", "Songti SC", "STSong", "Times New Roman", serif;
+  font-family: "Noto Serif SC", "LXGW WenKai", "Songti SC", serif;
 }
 
 .workspace {
@@ -36,6 +39,11 @@ body {
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255, 250, 241, 0.92), rgba(248, 235, 212, 0.92));
+  box-shadow: 0 8px 20px rgba(63, 38, 16, 0.08);
 }
 
 .topbar h1 {
@@ -90,12 +98,25 @@ body {
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 0.9rem;
+  position: relative;
+  box-shadow: 0 10px 24px rgba(87, 55, 24, 0.08);
+}
+
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px solid rgba(160, 114, 64, 0.25);
+  border-radius: 10px;
+  pointer-events: none;
 }
 
 .panel h2 {
   margin: 0;
   font-size: 1.1rem;
   margin-bottom: 0.7rem;
+  color: #5f371b;
+  letter-spacing: 0.08em;
 }
 
 .upload-form {
@@ -172,7 +193,7 @@ body {
 .chapter-list button.active,
 .character-list button.active {
   border-color: var(--accent);
-  background: #fff7ee;
+  background: linear-gradient(180deg, #fff3df, #f8e2c0);
 }
 
 .book-list .title,
@@ -243,6 +264,13 @@ body {
 
 .reader {
   min-height: calc(100vh - 150px);
+  background:
+    linear-gradient(180deg, rgba(255, 251, 244, 0.95), rgba(248, 236, 216, 0.95)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(158, 116, 65, 0.08) 0 1px,
+      transparent 1px 42px
+    );
 }
 
 .reader-head {
@@ -289,7 +317,7 @@ body {
   padding: 1rem;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: #fff;
+  background: linear-gradient(180deg, #fffcf6 0%, #fff8ea 100%);
   max-height: calc(100vh - 280px);
   overflow-y: auto;
 }
@@ -398,6 +426,92 @@ body {
   padding-top: 0.9rem;
 }
 
+.graph-panel {
+  margin-top: 1rem;
+  border-top: 1px solid var(--line);
+  padding-top: 0.9rem;
+}
+
+.graph-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.graph-head h3 {
+  margin: 0;
+}
+
+.graph-canvas-wrap {
+  margin-top: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background:
+    radial-gradient(circle at 20% 15%, rgba(169, 120, 68, 0.14), transparent 36%),
+    radial-gradient(circle at 88% 22%, rgba(120, 82, 48, 0.12), transparent 35%),
+    linear-gradient(180deg, #fffdfa 0%, #f7ebd9 100%);
+  overflow: auto;
+}
+
+.graph-canvas {
+  width: 100%;
+  min-width: 760px;
+  display: block;
+}
+
+.graph-toolbar {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.graph-toolbar input[type="range"] {
+  width: 200px;
+}
+
+.ghost-btn {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 0.3rem 0.6rem;
+  cursor: pointer;
+}
+
+.graph-label {
+  fill: #4b3828;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.graph-evidence-panel {
+  margin-top: 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 0.7rem;
+  background: #fff;
+}
+
+.graph-evidence-panel h4 {
+  margin: 0 0 0.5rem;
+}
+
+.graph-evidence-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.graph-evidence-list li {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 0.45rem 0.55rem;
+}
+
 .chat-head {
   display: flex;
   justify-content: space-between;
@@ -443,14 +557,15 @@ body {
   border: 1px solid var(--line);
   border-radius: 10px;
   padding: 0.6rem;
+  border-left: 3px solid rgba(141, 84, 35, 0.35);
 }
 
 .chat-user {
-  background: #f9f1e6;
+  background: #fcf0dd;
 }
 
 .chat-assistant {
-  background: #fcfbf9;
+  background: #fffaf1;
 }
 
 .chat-message header {

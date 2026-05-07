@@ -1,0 +1,3185 @@
+{
+  "generated_at_utc": "2026-05-05T13:51:04.694831+00:00",
+  "book_id": "bf3ede4a-2f74-4248-b853-f83cc2dae339",
+  "qa_file": "/app/eval/qa_50.jsonl",
+  "config": {
+    "dense_top_k": 20,
+    "bm25_top_k": 20,
+    "rrf_k": 60,
+    "final_top_k": 10,
+    "citation_k": 3,
+    "ks": [
+      1,
+      3,
+      5,
+      10
+    ],
+    "keyword_min_ratio": 0.6,
+    "use_llm_judge": true,
+    "use_llm_grounding": true,
+    "llm_judge_max_samples": 20,
+    "llm_grounding_max_samples": 20
+  },
+  "retrieval": {
+    "sample_count": 50,
+    "recall_at_k": {
+      "1": 0.4,
+      "3": 0.48,
+      "5": 0.5,
+      "10": 0.58
+    },
+    "mrr": 0.4497,
+    "ndcg_at_k": {
+      "1": 0.4,
+      "3": 0.4355,
+      "5": 0.4408,
+      "10": 0.4611
+    },
+    "latency_ms": {
+      "total": {
+        "avg": 8.395,
+        "p50": 8.193,
+        "p95": 11.429
+      },
+      "dense": {
+        "avg": 8.162,
+        "p50": 8.017,
+        "p95": 11.055
+      },
+      "bm25": {
+        "avg": 0.057,
+        "p50": 0.04,
+        "p95": 0.108
+      },
+      "fusion": {
+        "avg": 0.021,
+        "p50": 0.018,
+        "p95": 0.041
+      },
+      "rerank": {
+        "avg": 0.155,
+        "p50": 0.13,
+        "p95": 0.324
+      }
+    }
+  },
+  "generation": {
+    "accuracy_keyword": 0.4,
+    "accuracy_llm_judge": null,
+    "llm_judge_count": 0
+  },
+  "grounding": {
+    "citation_accuracy": 0.1967,
+    "unsupported_claim_rate": 0.1354,
+    "unsupported_claim_rate_llm": null,
+    "llm_grounding_count": 0
+  },
+  "failure_samples": [
+    {
+      "id": "rel1-014",
+      "question": "在第23章之前，贾政和宝玉更接近哪种关系？",
+      "support_chapters": [
+        9,
+        23
+      ],
+      "retrieved_chapters": [
+        20,
+        23,
+        11,
+        14,
+        19,
+        1,
+        9,
+        8,
+        12
+      ],
+      "first_rel_rank": 2,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第20章《第二十回 王熙凤正言弹妒意 林黛玉俏语谑娇音》中，在第与章之前存在明显互动，关系更接近“关联”。可见证据：第二十回 王熙凤正言弹妒意 林黛玉俏语谑娇音  话说宝玉在黛玉房中说“耗子精”，宝钗撞来，讽刺宝玉元宵不知“绿蜡”之典，三人正在房中互相取笑。那宝玉恐黛玉饭后贪眠，一时存了食，或夜间走了困，身体不好；幸而宝钗走来，大家谈笑，那黛玉方不欲睡，...",
+      "citations": [
+        {
+          "chapter_index": 20,
+          "chapter_title": "第二十回 王熙凤正言弹妒意 林黛玉俏语谑娇音",
+          "chunk_id": "d8089d15-7975-41f6-8cbb-05591c01aef3",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 23,
+          "chapter_title": "第二十三回 西厢记妙词通戏语 牡丹亭艳曲警芳心",
+          "chunk_id": "ff527c21-448c-455c-bf4a-61ec005b0fa2",
+          "score": 0.673046
+        },
+        {
+          "chapter_index": 11,
+          "chapter_title": "第十一回 庆寿辰宁府排家宴 见熙凤贾瑞起淫心",
+          "chunk_id": "fe9d66a8-8d0e-4929-a40e-7dd11c309a7e",
+          "score": 0.629435
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.911,
+        "bm25": 0.029,
+        "fusion": 0.016,
+        "rerank": 0.147,
+        "total": 8.103
+      }
+    },
+    {
+      "id": "rel1-015",
+      "question": "在第22章之前，贾琏和凤姐更接近哪种关系？",
+      "support_chapters": [
+        7,
+        22
+      ],
+      "retrieved_chapters": [
+        9,
+        7,
+        4,
+        6,
+        20,
+        18,
+        1,
+        17
+      ],
+      "first_rel_rank": 2,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》中，在第与章之前存在明显互动，关系更接近“主仆”。可见证据：这里茗烟走进来，便一把揪住金荣问道：“我们胔屁股不胔，管你相干？横竖没胔你的爹罢了！说你是好小子，出来动一动你茗大爷！”吓的满屋中子弟都忙忙的痴望。贾瑞忙喝：“茗烟不得撒野！”金荣气黄了脸，说：“反了！奴才小子都敢如此，我只和你主子说。...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "3125074a-3628-4ff4-9117-7011c6da57bb",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "7f6c93b5-8d6a-406b-b8bd-e7ff81ec1b56",
+          "score": 0.647588
+        },
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "b762c458-77a5-4c72-b3b4-f40de88f718b",
+          "score": 0.630081
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.125,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.673,
+        "bm25": 0.024,
+        "fusion": 0.015,
+        "rerank": 0.149,
+        "total": 8.861
+      }
+    },
+    {
+      "id": "qa-015",
+      "question": "第15回的标题是什么？",
+      "support_chapters": [
+        15
+      ],
+      "retrieved_chapters": [
+        13,
+        8,
+        15,
+        3,
+        1,
+        5
+      ],
+      "first_rel_rank": 3,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第13章《第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府》。结合证据内容：凤姐便问道：“什么事？”秦氏道：“目今祖茔虽四时祭祀，只是无一定的钱粮；第二，家塾虽立，无一定的供给。依我想来，如今盛时固不缺祭祀供给，但将来败落之时，此二项有何出处？莫若依我定见，趁今日富贵，将祖茔附近多置田庄、房舍、地亩，以备祭祀、供给...",
+      "citations": [
+        {
+          "chapter_index": 13,
+          "chapter_title": "第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府",
+          "chunk_id": "3f3f884f-ac55-4b67-9f3f-19aaee19488d",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 8,
+          "chapter_title": "第八回 比通灵金莺微露意 探宝钗黛玉半含酸",
+          "chunk_id": "7e984165-027b-4e33-b7f1-0dcbb81ca2af",
+          "score": 0.623676
+        },
+        {
+          "chapter_index": 15,
+          "chapter_title": "第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+          "chunk_id": "e0bc553f-830b-4018-96e6-bcf3ccf59118",
+          "score": 0.598074
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.803,
+        "bm25": 0.221,
+        "fusion": 0.03,
+        "rerank": 0.142,
+        "total": 8.196
+      }
+    },
+    {
+      "id": "qa-019",
+      "question": "第19回的标题是什么？",
+      "support_chapters": [
+        19
+      ],
+      "retrieved_chapters": [
+        7,
+        3,
+        19,
+        5,
+        1
+      ],
+      "first_rel_rank": 3,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第7章《第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟》。结合证据内容：那周瑞家的又和智能儿唠叨了一回，便往凤姐处来。穿过了夹道子，从李纨后窗下越过西花墙，出西角门，进凤姐院中。走至堂屋，只见小丫头丰儿坐在房门槛儿上，见周瑞家的来了，连忙的摆手儿，叫他往东屋里去。周瑞家的会意，忙着蹑手蹑脚儿的往东边屋里来，只见...",
+      "citations": [
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "7f6c93b5-8d6a-406b-b8bd-e7ff81ec1b56",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "a9be084a-4cc9-468b-a8a3-5c417256f18c",
+          "score": 0.654787
+        },
+        {
+          "chapter_index": 19,
+          "chapter_title": "第十九回 情切切良宵花解语 意绵绵静日玉生香",
+          "chunk_id": "aeff235e-1d9a-4982-8792-be235481e2cf",
+          "score": 0.65028
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.2,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.153,
+        "bm25": 0.031,
+        "fusion": 0.019,
+        "rerank": 0.304,
+        "total": 8.507
+      }
+    },
+    {
+      "id": "rel1-010",
+      "question": "在第28章之前，王夫人和宝玉更接近哪种关系？",
+      "support_chapters": [
+        18,
+        28
+      ],
+      "retrieved_chapters": [
+        10,
+        6,
+        4,
+        28,
+        13,
+        21,
+        5,
+        2,
+        1
+      ],
+      "first_rel_rank": 4,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第10章《第十回 金寡妇贪利权受辱 张太医论病细穷源》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：贾蓉于是同先生到外边屋里炕上坐了。一个婆子端了茶来，贾蓉道：“先生请茶。”茶毕，问道：“先生看这脉息还治得治不得？”先生说：“看得尊夫人脉息，左寸沉数，左关沉伏，右寸细而无力，右关虚而无神。其左寸沉数者，乃心气虚而生火；左关沉伏者，乃肝家气...",
+      "citations": [
+        {
+          "chapter_index": 10,
+          "chapter_title": "第十回 金寡妇贪利权受辱 张太医论病细穷源",
+          "chunk_id": "55cb7c48-a7c1-4213-a55a-1cd7ca0fcdac",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "21af478b-43e1-4b11-8ce1-27a6aa2bc55a",
+          "score": 0.686518
+        },
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "a2e623f7-b73e-43da-a4cd-df6c0fe23a39",
+          "score": 0.659113
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1429,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.223,
+        "bm25": 0.03,
+        "fusion": 0.018,
+        "rerank": 0.145,
+        "total": 8.416
+      }
+    },
+    {
+      "id": "rel1-011",
+      "question": "在第28章之前，宝玉和黛玉更接近哪种关系？",
+      "support_chapters": [
+        8,
+        28
+      ],
+      "retrieved_chapters": [
+        15,
+        6,
+        3,
+        4,
+        13,
+        28,
+        17
+      ],
+      "first_rel_rank": 6,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第15章《第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：凤姐听了这话，便发了兴头，说道：“你是素日知道我的，从来不信什么阴司地狱报应的，凭是什么事，我说要行就行。你叫他拿三千两银子来，我就替他出这口气。”老尼听说，喜之不胜，忙说：“有！有！这个不难。”凤姐又道：“我比不得他们扯篷拉纤的图银子。这...",
+      "citations": [
+        {
+          "chapter_index": 15,
+          "chapter_title": "第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+          "chunk_id": "cff02e04-4c0f-4f0f-89f7-48aba73db966",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "21af478b-43e1-4b11-8ce1-27a6aa2bc55a",
+          "score": 0.686709
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "fff164af-e2c0-47e9-badb-3a94ee72ef9a",
+          "score": 0.674752
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.2,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 10.009,
+        "bm25": 0.027,
+        "fusion": 0.017,
+        "rerank": 0.237,
+        "total": 10.291
+      }
+    },
+    {
+      "id": "rel1-012",
+      "question": "在第26章之前，宝玉和袭人更接近哪种关系？",
+      "support_chapters": [
+        21,
+        26
+      ],
+      "retrieved_chapters": [
+        7,
+        19,
+        22,
+        25,
+        12,
+        26,
+        8,
+        18
+      ],
+      "first_rel_rank": 6,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第7章《第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：凤姐和贾蓉也遥遥的听见了，都装作没听见。宝玉在车上听见，因问凤姐道：“姐姐，你听他说‘爬灰的爬灰’，这是什么话？”凤姐连忙喝道：“少胡说！那是醉汉嘴里胡唚，你是什么样的人，不说没听见，还倒细问！等我回了太太，看是捶你不捶你！”吓得宝玉连忙央...",
+      "citations": [
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "52812c9f-c77e-4604-91c8-133b223ca79d",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 19,
+          "chapter_title": "第十九回 情切切良宵花解语 意绵绵静日玉生香",
+          "chunk_id": "2917b5c8-e673-4fed-b442-d9b62c6c0405",
+          "score": 0.672116
+        },
+        {
+          "chapter_index": 22,
+          "chapter_title": "第二十二回 听曲文宝玉悟禅机 制灯谜贾政悲谶语",
+          "chunk_id": "e72285ee-6619-46e1-975f-113ecf7115d6",
+          "score": 0.661644
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.2857,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.017,
+        "bm25": 0.03,
+        "fusion": 0.018,
+        "rerank": 0.365,
+        "total": 8.431
+      }
+    },
+    {
+      "id": "rel1-009",
+      "question": "在第28章之前，黛玉和宝玉更接近哪种关系？",
+      "support_chapters": [
+        22,
+        28
+      ],
+      "retrieved_chapters": [
+        12,
+        6,
+        14,
+        23,
+        4,
+        7,
+        9,
+        22,
+        13
+      ],
+      "first_rel_rank": 8,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第12章《第十二回 王熙凤毒设相思局 贾天祥正照风月鉴》中，在第与章之前存在明显互动，关系更接近“冲突/对立”。可见证据：谁知这年冬底，林如海因为身染重疾，写书来特接黛玉回去。贾母听了，未免又加忧闷，只得忙忙的打点黛玉起身。宝玉大不自在，争奈父女之情，也不好拦阻。于是贾母定要贾琏送他去，仍叫带回来。一应土仪盘费，不消絮说，自然要妥贴的。作速择了日期，贾琏同着黛...",
+      "citations": [
+        {
+          "chapter_index": 12,
+          "chapter_title": "第十二回 王熙凤毒设相思局 贾天祥正照风月鉴",
+          "chunk_id": "ef38bf2d-a5bd-4328-b035-bca8f74dd882",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "c36d9d6e-e5e8-4c72-b2f0-8baaea9adb16",
+          "score": 0.6589
+        },
+        {
+          "chapter_index": 14,
+          "chapter_title": "第十四回 林如海灵返苏州郡 贾宝玉路谒北静王",
+          "chunk_id": "0ccd4193-1863-4f53-8308-fda684ba704b",
+          "score": 0.63773
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1429,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.275,
+        "bm25": 0.031,
+        "fusion": 0.017,
+        "rerank": 0.166,
+        "total": 7.491
+      }
+    }
+  ],
+  "per_query": [
+    {
+      "id": "qa-001",
+      "question": "第1回的标题是什么？",
+      "support_chapters": [
+        1
+      ],
+      "retrieved_chapters": [
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第1章《第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀》。结合证据内容：陋室空堂，当年笏满床。衰草枯杨，曾为歌舞场。蛛丝儿结满雕梁，绿纱今又在蓬窗上。说甚么脂正浓、粉正香，如何两鬓又成霜？昨日黄土陇头埋白骨，今宵红绡帐底卧鸳鸯。金满箱，银满箱，转眼乞丐人皆谤。正叹他人命不长，那知自己归来丧？训有方，保不定日后作...",
+      "citations": [
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "43434b4d-2dc5-4e2f-a205-6e6d33c11567",
+          "score": 0.525
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 1.0,
+      "unsupported_claim_rate": 0.1111,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 9.648,
+        "bm25": 0.033,
+        "fusion": 0.018,
+        "rerank": 0.338,
+        "total": 10.039
+      }
+    },
+    {
+      "id": "qa-002",
+      "question": "第2回的标题是什么？",
+      "support_chapters": [
+        2
+      ],
+      "retrieved_chapters": [
+        2,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第2章《第二回 贾夫人仙逝扬州城 冷子兴演说荣国府》。结合证据内容：雨村道：“正是。方才说政公已有一个衔玉之子，又有长子所遗弱孙，这赦老竟无一个不成？”子兴道：“政公既有玉儿之后，其妾又生了一个，倒不知其好歹。只眼前现有二子一孙，却不知将来何如。若问那赦老爷，也有一子，名叫贾琏，今已二十多岁了，亲上做亲，娶...",
+      "citations": [
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "fedc3038-e2f6-40e8-8289-12c757e1c53b",
+          "score": 0.525
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.491935
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.5,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.244,
+        "bm25": 0.033,
+        "fusion": 0.016,
+        "rerank": 0.102,
+        "total": 7.394
+      }
+    },
+    {
+      "id": "qa-003",
+      "question": "第3回的标题是什么？",
+      "support_chapters": [
+        3
+      ],
+      "retrieved_chapters": [
+        3,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第3章《第三回 托内兄如海荐西宾 接外孙贾母惜孤女》。结合证据内容：却说袭人倒有些痴处：伏侍贾母时，心中只有贾母；如今跟了宝玉，心中又只有宝玉了。只因宝玉性情乖僻，每每规谏，见宝玉不听，心中着实忧郁。是晚宝玉李嬷嬷已睡了，他见里面黛玉鹦哥犹未安歇，他自卸了妆，悄悄的进来，笑问：“姑娘怎么还不安歇？”黛玉忙笑...",
+      "citations": [
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "60cb9c32-c803-4adf-9298-a41395e2186b",
+          "score": 0.525
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.491935
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.5,
+      "unsupported_claim_rate": 0.3333,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.387,
+        "bm25": 0.031,
+        "fusion": 0.017,
+        "rerank": 0.099,
+        "total": 7.534
+      }
+    },
+    {
+      "id": "qa-004",
+      "question": "第4回的标题是什么？",
+      "support_chapters": [
+        4
+      ],
+      "retrieved_chapters": [
+        2,
+        1
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第2章《第二回 贾夫人仙逝扬州城 冷子兴演说荣国府》。结合证据内容：且说贾雨村在旅店偶感风寒，愈后又因盘费不继，正欲得一个居停之所以为息肩之地。偶遇两个旧友认得新盐政，知他正要请一西席教训女儿，遂将雨村荐进衙门去。这女学生年纪幼小，身体又弱，工课不限多寡，其馀不过两个伴读丫鬟，故雨村十分省力，正好养病。看看...",
+      "citations": [
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "872671d6-9f76-4002-8d00-a8eb844c00bd",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "d72f049d-127d-4336-9b74-ccd0a05662f8",
+          "score": 0.646678
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.928,
+        "bm25": 0.028,
+        "fusion": 0.016,
+        "rerank": 0.1,
+        "total": 7.073
+      }
+    },
+    {
+      "id": "qa-005",
+      "question": "第5回的标题是什么？",
+      "support_chapters": [
+        5
+      ],
+      "retrieved_chapters": [
+        4,
+        2,
+        1
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第4章《第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案》。结合证据内容：那时王夫人已知薛蟠官司一事亏贾雨村就中维持了，才放了心。又见哥哥升了边缺，正愁少了娘家的亲戚来往，略加寂寞。过了几日，忽家人报：“姨太太带了哥儿姐儿合家进京在门外下车了。”喜的王夫人忙带了人接到大厅上，将薛姨妈等接进去了。姊妹们一朝相见，悲...",
+      "citations": [
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "cb67aa17-29df-4290-9d14-78f7a1bc77f1",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "bd5a9fc1-8b23-44e6-b005-e03dd4a34474",
+          "score": 0.645332
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "1d8c043f-4b7b-406e-bde9-86720aeb9fd4",
+          "score": 0.484127
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.029,
+        "bm25": 0.031,
+        "fusion": 0.018,
+        "rerank": 0.104,
+        "total": 8.183
+      }
+    },
+    {
+      "id": "qa-006",
+      "question": "第6回的标题是什么？",
+      "support_chapters": [
+        6
+      ],
+      "retrieved_chapters": [
+        1
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第1章《第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀》。结合证据内容：看官你道此书从何而起？说来虽近荒唐，细玩颇有趣味。却说那女娲氏炼石补天之时，于大荒山无稽崖炼成高十二丈、见方二十四丈大的顽石三万六千五百零一块。那娲皇只用了三万六千五百块，单单剩下一块未用，弃在青埂峰下。谁知此石自经锻炼之后，灵性已通，自去...",
+      "citations": [
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.5
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.399,
+        "bm25": 0.03,
+        "fusion": 0.018,
+        "rerank": 0.112,
+        "total": 8.559
+      }
+    },
+    {
+      "id": "qa-007",
+      "question": "第7回的标题是什么？",
+      "support_chapters": [
+        7
+      ],
+      "retrieved_chapters": [
+        1,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第1章《第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀》。结合证据内容：看官你道此书从何而起？说来虽近荒唐，细玩颇有趣味。却说那女娲氏炼石补天之时，于大荒山无稽崖炼成高十二丈、见方二十四丈大的顽石三万六千五百零一块。那娲皇只用了三万六千五百块，单单剩下一块未用，弃在青埂峰下。谁知此石自经锻炼之后，灵性已通，自去...",
+      "citations": [
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.5
+        },
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "03ea1e90-d1fe-4527-8c38-85351b447571",
+          "score": 0.462121
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 11.367,
+        "bm25": 0.041,
+        "fusion": 0.024,
+        "rerank": 0.159,
+        "total": 11.59
+      }
+    },
+    {
+      "id": "qa-008",
+      "question": "第8回的标题是什么？",
+      "support_chapters": [
+        8
+      ],
+      "retrieved_chapters": [
+        1,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第1章《第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀》。结合证据内容：看官你道此书从何而起？说来虽近荒唐，细玩颇有趣味。却说那女娲氏炼石补天之时，于大荒山无稽崖炼成高十二丈、见方二十四丈大的顽石三万六千五百零一块。那娲皇只用了三万六千五百块，单单剩下一块未用，弃在青埂峰下。谁知此石自经锻炼之后，灵性已通，自去...",
+      "citations": [
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.5
+        },
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "03ea1e90-d1fe-4527-8c38-85351b447571",
+          "score": 0.462121
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.442,
+        "bm25": 0.03,
+        "fusion": 0.048,
+        "rerank": 0.134,
+        "total": 8.655
+      }
+    },
+    {
+      "id": "qa-009",
+      "question": "第9回的标题是什么？",
+      "support_chapters": [
+        9
+      ],
+      "retrieved_chapters": [
+        9,
+        4,
+        5,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》。结合证据内容：外边几个大仆人李贵等听见里边作反起来，忙都进来一齐喝住，问是何故，众声不一，这一个如此说，那一个又如彼说。李贵且喝骂了茗烟等四个一顿，撵了出去。秦钟的头早撞在金荣的板上，打去一层油皮，宝玉正拿褂襟子替他揉，见喝住了众人，便命：“李贵，收书，...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "3e975321-bbcb-416a-b004-ab3673aae1d8",
+          "score": 0.725
+        },
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "92c5f3b7-70d0-4e86-bec6-d33004765624",
+          "score": 0.676541
+        },
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "04fa8db7-5d44-4e7c-9f53-efd692939e7b",
+          "score": 0.65264
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 11.149,
+        "bm25": 0.044,
+        "fusion": 0.032,
+        "rerank": 0.353,
+        "total": 11.579
+      }
+    },
+    {
+      "id": "qa-010",
+      "question": "第10回的标题是什么？",
+      "support_chapters": [
+        10
+      ],
+      "retrieved_chapters": [
+        5,
+        8,
+        1
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第5章《第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦》。结合证据内容：宝玉看了不甚明白。又见后面画着一簇鲜花，一床破席，也有几句言词写道是：  枉自温柔和顺，空云似桂如兰。堪羡优伶有福，谁知公子无缘。  宝玉看了，益发解说不出是何意思。遂将这一本册子搁起来，又去开了“副册”橱门。拿起一本册来打开看时，只见首页...",
+      "citations": [
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "83bc433d-1226-4ce6-92ba-4a49c8f961e6",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 8,
+          "chapter_title": "第八回 比通灵金莺微露意 探宝钗黛玉半含酸",
+          "chunk_id": "c7b10025-ab25-46c5-910e-f4fcaf51f187",
+          "score": 0.688796
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "1d8c043f-4b7b-406e-bde9-86720aeb9fd4",
+          "score": 0.484127
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1429,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.962,
+        "bm25": 0.056,
+        "fusion": 0.017,
+        "rerank": 0.106,
+        "total": 8.142
+      }
+    },
+    {
+      "id": "qa-011",
+      "question": "第11回的标题是什么？",
+      "support_chapters": [
+        11
+      ],
+      "retrieved_chapters": [
+        5,
+        2,
+        6,
+        9,
+        8,
+        1
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第5章《第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦》。结合证据内容：〔恨无常〕喜荣华正好，恨无常又到，眼睁睁把万事全抛，荡悠悠芳魂销耗。望家乡路远山高。故向爹娘梦里相寻告：儿命已入黄泉，天伦呵须要退步抽身早！  〔分骨肉〕一帆风雨路三千，把骨肉家园，齐来抛闪。恐哭损残年，爹娘休把儿悬念。自古穷通皆有定，离合...",
+      "citations": [
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "04fa8db7-5d44-4e7c-9f53-efd692939e7b",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "fa8966ce-a592-4079-99e2-e8c4aa5ddd80",
+          "score": 0.687381
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "abdefae8-38bd-4695-af1c-863a46d57125",
+          "score": 0.67096
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1429,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.139,
+        "bm25": 0.092,
+        "fusion": 0.023,
+        "rerank": 0.143,
+        "total": 8.397
+      }
+    },
+    {
+      "id": "qa-012",
+      "question": "第12回的标题是什么？",
+      "support_chapters": [
+        12
+      ],
+      "retrieved_chapters": [
+        3,
+        11,
+        1,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第3章《第三回 托内兄如海荐西宾 接外孙贾母惜孤女》。结合证据内容：黛玉便忖度着：“因他有玉，所以才问我的。”便答道：“我没有玉。你那玉也是件稀罕物儿，岂能人人皆有？”宝玉听了，登时发作起狂病来，摘下那玉就狠命摔去，骂道：“什么罕物！人的高下不识，还说灵不灵呢！我也不要这劳什子！”吓的地下众人一拥争去拾玉。...",
+      "citations": [
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "8ed5df6f-711b-457a-9706-78424bb6208c",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 11,
+          "chapter_title": "第十一回 庆寿辰宁府排家宴 见熙凤贾瑞起淫心",
+          "chunk_id": "9aa439f8-4c1b-4f30-b2d5-c86e5106775b",
+          "score": 0.685737
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "1d8c043f-4b7b-406e-bde9-86720aeb9fd4",
+          "score": 0.476562
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.125,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.016,
+        "bm25": 0.036,
+        "fusion": 0.021,
+        "rerank": 0.117,
+        "total": 8.19
+      }
+    },
+    {
+      "id": "qa-013",
+      "question": "第13回的标题是什么？",
+      "support_chapters": [
+        13
+      ],
+      "retrieved_chapters": [
+        2,
+        12,
+        1,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第2章《第二回 贾夫人仙逝扬州城 冷子兴演说荣国府》。结合证据内容：雨村道：“正是。方才说政公已有一个衔玉之子，又有长子所遗弱孙，这赦老竟无一个不成？”子兴道：“政公既有玉儿之后，其妾又生了一个，倒不知其好歹。只眼前现有二子一孙，却不知将来何如。若问那赦老爷，也有一子，名叫贾琏，今已二十多岁了，亲上做亲，娶...",
+      "citations": [
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "fedc3038-e2f6-40e8-8289-12c757e1c53b",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 12,
+          "chapter_title": "第十二回 王熙凤毒设相思局 贾天祥正照风月鉴",
+          "chunk_id": "2165e660-fc6e-40ce-a0ca-fd4faad4de6e",
+          "score": 0.654879
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "1d8c043f-4b7b-406e-bde9-86720aeb9fd4",
+          "score": 0.484127
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.307,
+        "bm25": 0.029,
+        "fusion": 0.017,
+        "rerank": 0.099,
+        "total": 8.453
+      }
+    },
+    {
+      "id": "qa-014",
+      "question": "第14回的标题是什么？",
+      "support_chapters": [
+        14
+      ],
+      "retrieved_chapters": [
+        1,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第1章《第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀》。结合证据内容：看官你道此书从何而起？说来虽近荒唐，细玩颇有趣味。却说那女娲氏炼石补天之时，于大荒山无稽崖炼成高十二丈、见方二十四丈大的顽石三万六千五百零一块。那娲皇只用了三万六千五百块，单单剩下一块未用，弃在青埂峰下。谁知此石自经锻炼之后，灵性已通，自去...",
+      "citations": [
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.5
+        },
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "03ea1e90-d1fe-4527-8c38-85351b447571",
+          "score": 0.462121
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 10.755,
+        "bm25": 0.045,
+        "fusion": 0.031,
+        "rerank": 0.154,
+        "total": 10.986
+      }
+    },
+    {
+      "id": "qa-015",
+      "question": "第15回的标题是什么？",
+      "support_chapters": [
+        15
+      ],
+      "retrieved_chapters": [
+        13,
+        8,
+        15,
+        3,
+        1,
+        5
+      ],
+      "first_rel_rank": 3,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第13章《第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府》。结合证据内容：凤姐便问道：“什么事？”秦氏道：“目今祖茔虽四时祭祀，只是无一定的钱粮；第二，家塾虽立，无一定的供给。依我想来，如今盛时固不缺祭祀供给，但将来败落之时，此二项有何出处？莫若依我定见，趁今日富贵，将祖茔附近多置田庄、房舍、地亩，以备祭祀、供给...",
+      "citations": [
+        {
+          "chapter_index": 13,
+          "chapter_title": "第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府",
+          "chunk_id": "3f3f884f-ac55-4b67-9f3f-19aaee19488d",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 8,
+          "chapter_title": "第八回 比通灵金莺微露意 探宝钗黛玉半含酸",
+          "chunk_id": "7e984165-027b-4e33-b7f1-0dcbb81ca2af",
+          "score": 0.623676
+        },
+        {
+          "chapter_index": 15,
+          "chapter_title": "第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+          "chunk_id": "e0bc553f-830b-4018-96e6-bcf3ccf59118",
+          "score": 0.598074
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.803,
+        "bm25": 0.221,
+        "fusion": 0.03,
+        "rerank": 0.142,
+        "total": 8.196
+      }
+    },
+    {
+      "id": "qa-016",
+      "question": "第16回的标题是什么？",
+      "support_chapters": [
+        16
+      ],
+      "retrieved_chapters": [
+        3,
+        11,
+        1,
+        5,
+        2
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第3章《第三回 托内兄如海荐西宾 接外孙贾母惜孤女》。结合证据内容：众人见黛玉年纪虽小，其举止言谈不俗，身体面貌虽弱不胜衣，却有一段风流态度，便知他有不足之症。因问：“常服何药？为何不治好了？”黛玉道：“我自来如此，从会吃饭时便吃药，到如今了，经过多少名医，总未见效。那一年我才三岁，记得来了一个癞头和尚，说...",
+      "citations": [
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "f5fb8d20-b2cb-45ba-9461-ed00b194e808",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 11,
+          "chapter_title": "第十一回 庆寿辰宁府排家宴 见熙凤贾瑞起淫心",
+          "chunk_id": "3e66093d-3cf6-4499-8c14-8c26025e5dbf",
+          "score": 0.662403
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "1d8c043f-4b7b-406e-bde9-86720aeb9fd4",
+          "score": 0.484127
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 9.224,
+        "bm25": 0.031,
+        "fusion": 0.019,
+        "rerank": 0.111,
+        "total": 9.385
+      }
+    },
+    {
+      "id": "qa-017",
+      "question": "第17回的标题是什么？",
+      "support_chapters": [
+        17
+      ],
+      "retrieved_chapters": [
+        6,
+        16,
+        3,
+        11,
+        4,
+        7,
+        5,
+        1
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第6章《第六回 贾宝玉初试云雨情 刘姥姥一进荣国府》。结合证据内容：刘姥姥只听见咯当咯当的响声，很似打罗筛面的一般，不免东瞧西望的。忽见堂屋中柱子上挂着一个匣子，底下又坠着一个秤铊似的，却不住的乱晃。刘姥姥心中想着：“这是什么东西？有煞用处呢？”正发呆时，陡听得当的一声又若金钟铜磬一般，倒吓得不住的展眼儿。...",
+      "citations": [
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "ee5375f9-5005-46b9-a5ab-7a0cc4ee2453",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 16,
+          "chapter_title": "第十六回 贾元春才选凤藻宫 秦鲸卿夭逝黄泉路",
+          "chunk_id": "667277a0-7264-450c-8910-a9679203e2a6",
+          "score": 0.68899
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "e4b99a05-eec0-4a14-8e17-3c30ad342b2f",
+          "score": 0.660541
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.2,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 9.133,
+        "bm25": 0.033,
+        "fusion": 0.064,
+        "rerank": 0.183,
+        "total": 9.413
+      }
+    },
+    {
+      "id": "qa-018",
+      "question": "第18回的标题是什么？",
+      "support_chapters": [
+        18
+      ],
+      "retrieved_chapters": [
+        3,
+        1,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第3章《第三回 托内兄如海荐西宾 接外孙贾母惜孤女》。结合证据内容：黛玉便忖度着：“因他有玉，所以才问我的。”便答道：“我没有玉。你那玉也是件稀罕物儿，岂能人人皆有？”宝玉听了，登时发作起狂病来，摘下那玉就狠命摔去，骂道：“什么罕物！人的高下不识，还说灵不灵呢！我也不要这劳什子！”吓的地下众人一拥争去拾玉。...",
+      "citations": [
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "8ed5df6f-711b-457a-9706-78424bb6208c",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "8e0fe8d6-a3d5-4a67-bcb3-2a4b55ba43dc",
+          "score": 0.648003
+        },
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "03ea1e90-d1fe-4527-8c38-85351b447571",
+          "score": 0.462121
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.125,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.528,
+        "bm25": 0.024,
+        "fusion": 0.016,
+        "rerank": 0.096,
+        "total": 7.664
+      }
+    },
+    {
+      "id": "qa-019",
+      "question": "第19回的标题是什么？",
+      "support_chapters": [
+        19
+      ],
+      "retrieved_chapters": [
+        7,
+        3,
+        19,
+        5,
+        1
+      ],
+      "first_rel_rank": 3,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第7章《第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟》。结合证据内容：那周瑞家的又和智能儿唠叨了一回，便往凤姐处来。穿过了夹道子，从李纨后窗下越过西花墙，出西角门，进凤姐院中。走至堂屋，只见小丫头丰儿坐在房门槛儿上，见周瑞家的来了，连忙的摆手儿，叫他往东屋里去。周瑞家的会意，忙着蹑手蹑脚儿的往东边屋里来，只见...",
+      "citations": [
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "7f6c93b5-8d6a-406b-b8bd-e7ff81ec1b56",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "a9be084a-4cc9-468b-a8a3-5c417256f18c",
+          "score": 0.654787
+        },
+        {
+          "chapter_index": 19,
+          "chapter_title": "第十九回 情切切良宵花解语 意绵绵静日玉生香",
+          "chunk_id": "aeff235e-1d9a-4982-8792-be235481e2cf",
+          "score": 0.65028
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.2,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.153,
+        "bm25": 0.031,
+        "fusion": 0.019,
+        "rerank": 0.304,
+        "total": 8.507
+      }
+    },
+    {
+      "id": "qa-020",
+      "question": "第20回的标题是什么？",
+      "support_chapters": [
+        20
+      ],
+      "retrieved_chapters": [
+        8,
+        13,
+        7,
+        1,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，最相关的是第8章《第八回 比通灵金莺微露意 探宝钗黛玉半含酸》。结合证据内容：他二人道了扰，一径回至贾母房中。贾母尚未用晚饭，知是薛姨妈处来，更加喜欢。因见宝玉吃了酒，遂叫他自回房中歇着，不许再出来了。又令人好生招呼着。忽想起跟宝玉的人来，遂问众人：“李奶子怎么不见？”众人不敢直说他家去了，只说：“才进来了，想是有事...",
+      "citations": [
+        {
+          "chapter_index": 8,
+          "chapter_title": "第八回 比通灵金莺微露意 探宝钗黛玉半含酸",
+          "chunk_id": "3c888a20-2fad-469a-ac5e-f025b1aa3667",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 13,
+          "chapter_title": "第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府",
+          "chunk_id": "3bdd17fb-0644-4712-9755-c384b962c4b9",
+          "score": 0.664892
+        },
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "b86db4f9-005b-4ee4-b85b-260b02916e2f",
+          "score": 0.639756
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1429,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.481,
+        "bm25": 0.033,
+        "fusion": 0.017,
+        "rerank": 0.104,
+        "total": 8.636
+      }
+    },
+    {
+      "id": "qa1-001",
+      "question": "包含“甄士隐梦幻识通灵”这个线索的是哪一回？",
+      "support_chapters": [
+        1
+      ],
+      "retrieved_chapters": [
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第1章《第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀》。结合证据内容：第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀  此开卷第一回也。作者自云：曾历过一番梦幻之后，故将真事隐去，而借通灵说此《石头记》一书也，故曰“甄士隐”云云。但书中所记何事何人？自己又云：“今风尘碌碌，一事无成，忽念及当日所有之女子，一一细考...",
+      "citations": [
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "d72f049d-127d-4336-9b74-ccd0a05662f8",
+          "score": 0.726243
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 1.0,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 4.971,
+        "bm25": 0.099,
+        "fusion": 0.015,
+        "rerank": 0.069,
+        "total": 5.154
+      }
+    },
+    {
+      "id": "qa1-002",
+      "question": "包含“贾夫人仙逝扬州城”这个线索的是哪一回？",
+      "support_chapters": [
+        2
+      ],
+      "retrieved_chapters": [
+        2,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第2章《第二回 贾夫人仙逝扬州城 冷子兴演说荣国府》。结合证据内容：第二回 贾夫人仙逝扬州城 冷子兴演说荣国府  却说封肃听见公差传唤，忙出来陪笑启问，那些人只嚷：“快请出甄爷来。”封肃忙陪笑道：“小人姓封，并不姓甄。只有当日小婿姓甄，今已出家一二年了，不知可是问他？”那些公人道：“我们也不知什么‘真’‘假...",
+      "citations": [
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "7e1c9d84-bed9-4a91-8767-3bdbf22a7ecb",
+          "score": 0.883333
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.387354
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.5,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.696,
+        "bm25": 0.09,
+        "fusion": 0.015,
+        "rerank": 0.128,
+        "total": 6.928
+      }
+    },
+    {
+      "id": "qa1-003",
+      "question": "包含“托内兄如海荐西宾”这个线索的是哪一回？",
+      "support_chapters": [
+        3
+      ],
+      "retrieved_chapters": [
+        3,
+        2,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第3章《第三回 托内兄如海荐西宾 接外孙贾母惜孤女》。结合证据内容：第三回 托内兄如海荐西宾 接外孙贾母惜孤女  却说雨村忙回头看时，不是别人，乃是当日同僚一案参革的张如圭。他系此地人，革后家居，今打听得都中奏准起复旧员之信，他便四下里寻情找门路，忽遇见雨村，故忙道喜。二人见了礼，张如圭便将此信告知雨村，雨...",
+      "citations": [
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9cf742c1-5132-4ab6-bdd2-f57fa7fa1628",
+          "score": 0.844801
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.454032
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "b4125fda-0bed-436e-ae3c-65b99ec8b5d6",
+          "score": 0.398883
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.508,
+        "bm25": 0.068,
+        "fusion": 0.015,
+        "rerank": 0.145,
+        "total": 6.736
+      }
+    },
+    {
+      "id": "qa1-004",
+      "question": "包含“薄命女偏逢薄命郎”这个线索的是哪一回？",
+      "support_chapters": [
+        4
+      ],
+      "retrieved_chapters": [
+        4,
+        2,
+        3,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第4章《第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案》。结合证据内容：第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案  却说黛玉同姐妹们至王夫人处，见王夫人正和兄嫂处的来使计议家务，又说姨母家遭人命官司等语。因见王夫人事情冗杂，姐妹们遂出来，至寡嫂李氏房中来了。原来这李氏即贾珠之妻。珠虽夭亡，幸存一子，取名贾兰，...",
+      "citations": [
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "1cd855e0-80ef-402b-8cf3-590465954c1e",
+          "score": 0.883333
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.391272
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.378121
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.633,
+        "bm25": 0.236,
+        "fusion": 0.054,
+        "rerank": 0.307,
+        "total": 7.23
+      }
+    },
+    {
+      "id": "qa1-005",
+      "question": "包含“游幻境指迷十二钗”这个线索的是哪一回？",
+      "support_chapters": [
+        5
+      ],
+      "retrieved_chapters": [
+        5,
+        2,
+        3,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第5章《第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦》。结合证据内容：第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦  第四回中既将薛家母子在荣府中寄居等事略已表明，此回暂可不写了。如今且说林黛玉自在荣府，一来贾母万般怜爱，寝食起居一如宝玉，把那迎春、探春、惜春三个孙女儿倒且靠后了；就是宝玉黛玉二人的亲密友爱，也...",
+      "citations": [
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "8387e1d3-76d7-4b1a-88de-66d7523c42ed",
+          "score": 0.883333
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.428121
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.412626
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.419,
+        "bm25": 0.04,
+        "fusion": 0.015,
+        "rerank": 0.1,
+        "total": 6.574
+      }
+    },
+    {
+      "id": "qa1-006",
+      "question": "包含“贾宝玉初试云雨情”这个线索的是哪一回？",
+      "support_chapters": [
+        6
+      ],
+      "retrieved_chapters": [
+        6,
+        2,
+        3,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第6章《第六回 贾宝玉初试云雨情 刘姥姥一进荣国府》。结合证据内容：第六回 贾宝玉初试云雨情 刘姥姥一进荣国府  却说秦氏因听见宝玉梦中唤他的乳名，心中纳闷，又不好细问。彼时宝玉迷迷惑惑，若有所失，遂起身解怀整衣。袭人过来给他系裤带时，刚伸手至大腿处，只觉冰冷粘湿的一片，吓的忙褪回手来，问：“是怎么了？”宝...",
+      "citations": [
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "b9ae60d3-49ac-40e1-9207-50066bb897cf",
+          "score": 0.848431
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.456
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.439144
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.602,
+        "bm25": 0.043,
+        "fusion": 0.014,
+        "rerank": 0.095,
+        "total": 6.754
+      }
+    },
+    {
+      "id": "qa1-007",
+      "question": "包含“送宫花贾琏戏熙凤”这个线索的是哪一回？",
+      "support_chapters": [
+        7
+      ],
+      "retrieved_chapters": [
+        7,
+        2,
+        3,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第7章《第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟》。结合证据内容：第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟  话说周瑞家的送了刘姥姥去后，便上来回王夫人话，谁知王夫人不在上房，问丫鬟们，方知往薛姨妈那边说话儿去了。周瑞家的听说，便出东角门过东院往梨香院来。刚至院门前，只见王夫人的丫鬟金钏儿和那一个才留头...",
+      "citations": [
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "a856a2db-1618-4acc-a733-0059370bad5b",
+          "score": 0.845692
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.456
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.439144
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.621,
+        "bm25": 0.09,
+        "fusion": 0.016,
+        "rerank": 0.104,
+        "total": 8.832
+      }
+    },
+    {
+      "id": "qa1-008",
+      "question": "包含“比通灵金莺微露意”这个线索的是哪一回？",
+      "support_chapters": [
+        8
+      ],
+      "retrieved_chapters": [
+        8,
+        2,
+        6,
+        3,
+        7,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第8章《第八回 比通灵金莺微露意 探宝钗黛玉半含酸》。结合证据内容：第八回 比通灵金莺微露意 探宝钗黛玉半含酸  话说宝玉和凤姐回家，见过众人，宝玉便回明贾母要约秦钟上家塾之事，自己也有个伴读的朋友，正好发愤；又着实称赞秦钟人品行事，最是可人怜爱的。凤姐又在一旁帮着说：“改日秦钟还来拜见老祖宗呢。”说的贾母...",
+      "citations": [
+        {
+          "chapter_index": 8,
+          "chapter_title": "第八回 比通灵金莺微露意 探宝钗黛玉半含酸",
+          "chunk_id": "59c92267-a579-462f-9514-002e2130d976",
+          "score": 0.883333
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.394217
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "21af478b-43e1-4b11-8ce1-27a6aa2bc55a",
+          "score": 0.390008
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.2,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.208,
+        "bm25": 0.115,
+        "fusion": 0.016,
+        "rerank": 0.112,
+        "total": 7.452
+      }
+    },
+    {
+      "id": "qa1-009",
+      "question": "包含“恋风流情友入家塾”这个线索的是哪一回？",
+      "support_chapters": [
+        9
+      ],
+      "retrieved_chapters": [
+        9,
+        2,
+        3,
+        7,
+        1,
+        4
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》。结合证据内容：第九回 恋风流情友入家塾 起嫌疑顽童闹学堂  话说秦邦业父子专候贾家人来送上学之信。原来宝玉急于要和秦钟相遇，遂择了后日一定上学，打发人送了信。到了这天，宝玉起来时，袭人早已把书笔文物收拾停妥，坐在床沿上发闷，见宝玉起来，只得伏侍他梳洗。宝...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "f6a9f587-9fa1-4a67-a229-c3d54dc2e45a",
+          "score": 0.882909
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.452033
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.431305
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.169,
+        "bm25": 0.042,
+        "fusion": 0.015,
+        "rerank": 0.104,
+        "total": 7.33
+      }
+    },
+    {
+      "id": "qa1-010",
+      "question": "包含“金寡妇贪利权受辱”这个线索的是哪一回？",
+      "support_chapters": [
+        10
+      ],
+      "retrieved_chapters": [
+        10,
+        2,
+        3,
+        7,
+        8,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第10章《第十回 金寡妇贪利权受辱 张太医论病细穷源》。结合证据内容：第十回 金寡妇贪利权受辱 张太医论病细穷源  话说金荣因人多势众，又兼贾瑞勒令赔了不是，给秦钟磕了头，宝玉方才不吵闹了。大家散了学，金荣自己回到家中，越想越气，说：“秦钟不过是贾蓉的小舅子，又不是贾家的子孙，附学读书，也不过和我一样。因他仗...",
+      "citations": [
+        {
+          "chapter_index": 10,
+          "chapter_title": "第十回 金寡妇贪利权受辱 张太医论病细穷源",
+          "chunk_id": "c5f5d338-1cb4-49d9-a5a1-090abd5f750d",
+          "score": 0.775178
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.456
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.353964
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.796,
+        "bm25": 0.083,
+        "fusion": 0.016,
+        "rerank": 0.115,
+        "total": 7.01
+      }
+    },
+    {
+      "id": "qa1-011",
+      "question": "包含“庆寿辰宁府排家宴”这个线索的是哪一回？",
+      "support_chapters": [
+        11
+      ],
+      "retrieved_chapters": [
+        11,
+        2,
+        3,
+        7,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第11章《第十一回 庆寿辰宁府排家宴 见熙凤贾瑞起淫心》。结合证据内容：第十一回 庆寿辰宁府排家宴 见熙凤贾瑞起淫心  话说是日贾敬的寿辰，贾珍先将上等可吃的东西、稀奇的果品，装了十六大捧盒，着贾蓉带领家下人送与贾敬去，向贾蓉说道：“你留神看太爷喜欢不喜欢，你就行了礼起来，说：‘父亲遵太爷的话，不敢前来，在家里...",
+      "citations": [
+        {
+          "chapter_index": 11,
+          "chapter_title": "第十一回 庆寿辰宁府排家宴 见熙凤贾瑞起淫心",
+          "chunk_id": "68e98744-0637-4dc6-b631-298d24221fbd",
+          "score": 0.872736
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.452033
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.431305
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.07,
+        "bm25": 0.1,
+        "fusion": 0.021,
+        "rerank": 0.132,
+        "total": 8.323
+      }
+    },
+    {
+      "id": "qa1-012",
+      "question": "包含“王熙凤毒设相思局”这个线索的是哪一回？",
+      "support_chapters": [
+        12
+      ],
+      "retrieved_chapters": [
+        12,
+        2,
+        3,
+        7,
+        1,
+        5
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第12章《第十二回 王熙凤毒设相思局 贾天祥正照风月鉴》。结合证据内容：第十二回 王熙凤毒设相思局 贾天祥正照风月鉴  话说凤姐正与平儿说话，只见有人回说：“瑞大爷来了。”凤姐命：“请进来罢。”贾瑞见请，心中暗喜，见了凤姐，满面陪笑，连连问好。凤姐儿也假意殷勤让坐让茶。贾瑞见凤姐如此打扮，越发酥倒，因饧了眼问道...",
+      "citations": [
+        {
+          "chapter_index": 12,
+          "chapter_title": "第十二回 王熙凤毒设相思局 贾天祥正照风月鉴",
+          "chunk_id": "f6df11af-2f3f-4273-a3ea-673b56f785c9",
+          "score": 0.783286
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.352119
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.337806
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.199,
+        "bm25": 0.098,
+        "fusion": 0.032,
+        "rerank": 0.112,
+        "total": 7.44
+      }
+    },
+    {
+      "id": "qa1-013",
+      "question": "包含“秦可卿死封龙禁尉”这个线索的是哪一回？",
+      "support_chapters": [
+        13
+      ],
+      "retrieved_chapters": [
+        13,
+        1,
+        3,
+        2,
+        7,
+        12
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第13章《第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府》。结合证据内容：第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府  话说凤姐儿自贾琏送黛玉往扬州去后，心中实在无趣，每到晚间不过同平儿说笑一回，就胡乱睡了。这日夜间和平儿灯下拥炉，早命浓熏绣被，二人睡下，屈指计算行程该到何处。不知不觉已交三鼓，平儿已睡熟了。凤...",
+      "citations": [
+        {
+          "chapter_index": 13,
+          "chapter_title": "第十三回 秦可卿死封龙禁尉 王熙凤协理宁国府",
+          "chunk_id": "74508bff-6230-4cff-ba8c-a64aae43ea2f",
+          "score": 0.795599
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "021ef7ac-5676-446b-ab71-22148e14c4a4",
+          "score": 0.457937
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "f8e1de09-f162-4dca-9fe5-64e73defbe5f",
+          "score": 0.40433
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.455,
+        "bm25": 0.042,
+        "fusion": 0.026,
+        "rerank": 0.105,
+        "total": 7.629
+      }
+    },
+    {
+      "id": "qa1-014",
+      "question": "包含“林如海灵返苏州郡”这个线索的是哪一回？",
+      "support_chapters": [
+        14
+      ],
+      "retrieved_chapters": [
+        14,
+        2,
+        3,
+        7,
+        4,
+        12,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第14章《第十四回 林如海灵返苏州郡 贾宝玉路谒北静王》。结合证据内容：第十四回 林如海灵返苏州郡 贾宝玉路谒北静王  话说宁国府中都总管赖升闻知里面委请了凤姐，因传齐同事人等，说道：“如今请了西府里琏二奶奶管理内事，倘或他来支取东西，或是说话，小心伺候才好。每日大家早来晚散，宁可辛苦这一个月，过后再歇息，别把...",
+      "citations": [
+        {
+          "chapter_index": 14,
+          "chapter_title": "第十四回 林如海灵返苏州郡 贾宝玉路谒北静王",
+          "chunk_id": "b8845074-64dc-4b3a-9c1d-8b4fd16f8f02",
+          "score": 0.883333
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.420503
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "8ed5df6f-711b-457a-9706-78424bb6208c",
+          "score": 0.408378
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.402,
+        "bm25": 0.047,
+        "fusion": 0.017,
+        "rerank": 0.109,
+        "total": 7.575
+      }
+    },
+    {
+      "id": "qa1-015",
+      "question": "包含“王凤姐弄权铁槛寺”这个线索的是哪一回？",
+      "support_chapters": [
+        15
+      ],
+      "retrieved_chapters": [
+        15,
+        2,
+        3,
+        7,
+        12,
+        1
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，最相关的是第15章《第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵》。结合证据内容：第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵  话说宝玉举目见北静王世荣头上戴着净白簪缨银翅王帽，穿着江牙海水五爪龙白蟒袍，系着碧玉红鞓带，面如美玉，目似明星，真好秀丽人物。宝玉忙抢上来参见，世荣从轿内伸手搀住。见宝玉戴着束发银冠，勒着双龙...",
+      "citations": [
+        {
+          "chapter_index": 15,
+          "chapter_title": "第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+          "chunk_id": "96e90a3a-9af0-4819-84da-bc43f68e5bdf",
+          "score": 0.684769
+        },
+        {
+          "chapter_index": 2,
+          "chapter_title": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府",
+          "chunk_id": "0fa0778c-f101-49a9-a5a3-711d7f066841",
+          "score": 0.461719
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "9bfb6b38-995d-4a55-b0de-f74ac9fed95c",
+          "score": 0.444771
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.874,
+        "bm25": 0.081,
+        "fusion": 0.016,
+        "rerank": 0.101,
+        "total": 7.073
+      }
+    },
+    {
+      "id": "rel1-001",
+      "question": "在第29章之前，贾珍和贾蓉更接近哪种关系？",
+      "support_chapters": [
+        13,
+        29
+      ],
+      "retrieved_chapters": [
+        9,
+        23,
+        18,
+        11,
+        25,
+        28,
+        2,
+        27,
+        19
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，在第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》中，在第与章之前存在明显互动，关系更接近“关联”。可见证据：这茗烟乃是宝玉第一个得用且又年轻不谙事的，今听贾蔷说：“金荣如此欺负秦钟，连你们的爷宝玉都干连在内，不给他个知道，下次越发狂纵。”这茗烟无故就要欺压人的，如今得了这信，又有贾蔷助着，便一头进来找金荣。也不叫“金相公”了，只说：“姓金的，你什...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "fe95f1db-5283-4aca-933c-69d3d9c3bf23",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 23,
+          "chapter_title": "第二十三回 西厢记妙词通戏语 牡丹亭艳曲警芳心",
+          "chunk_id": "ff527c21-448c-455c-bf4a-61ec005b0fa2",
+          "score": 0.614597
+        },
+        {
+          "chapter_index": 18,
+          "chapter_title": "第十八回 皇恩重元妃省父母 天伦乐宝玉呈才藻",
+          "chunk_id": "ae123b7e-8593-46cf-bdd0-00aff6a2fdae",
+          "score": 0.599841
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 10.94,
+        "bm25": 0.04,
+        "fusion": 0.02,
+        "rerank": 0.246,
+        "total": 11.247
+      }
+    },
+    {
+      "id": "rel1-002",
+      "question": "在第18章之前，贾妃和宝玉更接近哪种关系？",
+      "support_chapters": [
+        18
+      ],
+      "retrieved_chapters": [
+        7,
+        17,
+        8,
+        6,
+        5,
+        1
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，在第7章《第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：一时周瑞家的携花至王夫人正房后。原来近日贾母说孙女们太多，一处挤着倒不便，只留宝玉黛玉二人在这边解闷，却将迎春、探春、惜春三人移到王夫人这边房后三间抱厦内居住，令李纨陪伴照管。如今周瑞家的故顺路先往这里来，只见几个小丫头都在抱厦内默坐，听着...",
+      "citations": [
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "32a5d453-8c55-46d9-8037-62b3f68b3728",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 17,
+          "chapter_title": "第十七回 大观园试才题对额 荣国府归省庆元宵",
+          "chunk_id": "d6703851-cb1e-451d-b564-b685cd9c3eb0",
+          "score": 0.668357
+        },
+        {
+          "chapter_index": 8,
+          "chapter_title": "第八回 比通灵金莺微露意 探宝钗黛玉半含酸",
+          "chunk_id": "47bb64c8-b432-46e2-9ff6-ca4d55ce464c",
+          "score": 0.657355
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.606,
+        "bm25": 0.034,
+        "fusion": 0.019,
+        "rerank": 0.177,
+        "total": 7.836
+      }
+    },
+    {
+      "id": "rel1-003",
+      "question": "在第6章之前，王夫人和凤姐更接近哪种关系？",
+      "support_chapters": [
+        6
+      ],
+      "retrieved_chapters": [
+        6,
+        1,
+        5,
+        2
+      ],
+      "first_rel_rank": 1,
+      "recall_at": {
+        "1": 1,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第6章《第六回 贾宝玉初试云雨情 刘姥姥一进荣国府》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：这里凤姐叫人抓了些果子给板儿吃，刚问了几句闲话时，就有家下许多媳妇儿管事的来回话。平儿回了，凤姐道：“我这里陪客呢，晚上再来回。要有紧事，你就带进来现办。”平儿出去，一会进来说：“我问了，没什么要紧的。我叫他们散了。”凤姐点头。只见周瑞家的...",
+      "citations": [
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "2c80fbe6-37dc-4655-9a34-daeee21e90f4",
+          "score": 0.725
+        },
+        {
+          "chapter_index": 1,
+          "chapter_title": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀",
+          "chunk_id": "d72f049d-127d-4336-9b74-ccd0a05662f8",
+          "score": 0.656716
+        },
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "8387e1d3-76d7-4b1a-88de-66d7523c42ed",
+          "score": 0.645583
+        }
+      ],
+      "generation_accuracy_keyword": true,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.2857,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 6.239,
+        "bm25": 0.096,
+        "fusion": 0.019,
+        "rerank": 0.106,
+        "total": 6.46
+      }
+    },
+    {
+      "id": "rel1-004",
+      "question": "在第30章之前，宝玉和王夫人更接近哪种关系？",
+      "support_chapters": [
+        25,
+        30
+      ],
+      "retrieved_chapters": [
+        16,
+        19,
+        15,
+        3,
+        29,
+        4,
+        24,
+        20,
+        5
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，在第16章《第十六回 贾元春才选凤藻宫 秦鲸卿夭逝黄泉路》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：且喜贾琏与黛玉回来，先遣人来报信：“明日就可到家了。”宝玉听了，方略有些喜意。细问原由，方知贾雨村也进京引见，皆由王子腾累上荐本，此来候补京缺，与贾琏是同宗弟兄，又与黛玉有师徒之谊，故同路作伴而来。林如海已葬入祖茔了，诸事停妥。贾琏这番进京...",
+      "citations": [
+        {
+          "chapter_index": 16,
+          "chapter_title": "第十六回 贾元春才选凤藻宫 秦鲸卿夭逝黄泉路",
+          "chunk_id": "667277a0-7264-450c-8910-a9679203e2a6",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 19,
+          "chapter_title": "第十九回 情切切良宵花解语 意绵绵静日玉生香",
+          "chunk_id": "d71b8ba6-0f75-46ef-a6b7-c56ae8f66355",
+          "score": 0.683463
+        },
+        {
+          "chapter_index": 15,
+          "chapter_title": "第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+          "chunk_id": "9dc35341-cf2c-40da-88d4-b305b8ad12b9",
+          "score": 0.647857
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1667,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 9.023,
+        "bm25": 0.094,
+        "fusion": 0.02,
+        "rerank": 0.174,
+        "total": 9.311
+      }
+    },
+    {
+      "id": "rel1-005",
+      "question": "在第29章之前，贾母和宝钗更接近哪种关系？",
+      "support_chapters": [
+        22,
+        29
+      ],
+      "retrieved_chapters": [
+        9,
+        23,
+        5,
+        11,
+        1,
+        25,
+        28,
+        27
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，在第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》中，在第与章之前存在明显互动，关系更接近“关联”。可见证据：这茗烟乃是宝玉第一个得用且又年轻不谙事的，今听贾蔷说：“金荣如此欺负秦钟，连你们的爷宝玉都干连在内，不给他个知道，下次越发狂纵。”这茗烟无故就要欺压人的，如今得了这信，又有贾蔷助着，便一头进来找金荣。也不叫“金相公”了，只说：“姓金的，你什...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "fe95f1db-5283-4aca-933c-69d3d9c3bf23",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 23,
+          "chapter_title": "第二十三回 西厢记妙词通戏语 牡丹亭艳曲警芳心",
+          "chunk_id": "ff527c21-448c-455c-bf4a-61ec005b0fa2",
+          "score": 0.614597
+        },
+        {
+          "chapter_index": 5,
+          "chapter_title": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦",
+          "chunk_id": "cdd29be0-3587-4e40-8c02-da6c3bf91e38",
+          "score": 0.602864
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 13.333,
+        "bm25": 0.049,
+        "fusion": 0.022,
+        "rerank": 0.197,
+        "total": 13.602
+      }
+    },
+    {
+      "id": "rel1-006",
+      "question": "在第29章之前，贾母和黛玉更接近哪种关系？",
+      "support_chapters": [
+        3,
+        29
+      ],
+      "retrieved_chapters": [
+        9,
+        17,
+        23,
+        7,
+        11,
+        25,
+        28
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，在第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》中，在第与章之前存在明显互动，关系更接近“关联”。可见证据：这茗烟乃是宝玉第一个得用且又年轻不谙事的，今听贾蔷说：“金荣如此欺负秦钟，连你们的爷宝玉都干连在内，不给他个知道，下次越发狂纵。”这茗烟无故就要欺压人的，如今得了这信，又有贾蔷助着，便一头进来找金荣。也不叫“金相公”了，只说：“姓金的，你什...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "fe95f1db-5283-4aca-933c-69d3d9c3bf23",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 17,
+          "chapter_title": "第十七回 大观园试才题对额 荣国府归省庆元宵",
+          "chunk_id": "8cf75e74-1a04-4b54-a7ab-8c3cbebfbc8e",
+          "score": 0.63722
+        },
+        {
+          "chapter_index": 23,
+          "chapter_title": "第二十三回 西厢记妙词通戏语 牡丹亭艳曲警芳心",
+          "chunk_id": "ff527c21-448c-455c-bf4a-61ec005b0fa2",
+          "score": 0.606789
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.547,
+        "bm25": 0.053,
+        "fusion": 0.018,
+        "rerank": 0.129,
+        "total": 8.747
+      }
+    },
+    {
+      "id": "rel1-007",
+      "question": "在第29章之前，宝玉和黛玉更接近哪种关系？",
+      "support_chapters": [
+        5,
+        29
+      ],
+      "retrieved_chapters": [
+        9,
+        15,
+        3,
+        23,
+        11,
+        6,
+        28,
+        25
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，在第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》中，在第与章之前存在明显互动，关系更接近“关联”。可见证据：这茗烟乃是宝玉第一个得用且又年轻不谙事的，今听贾蔷说：“金荣如此欺负秦钟，连你们的爷宝玉都干连在内，不给他个知道，下次越发狂纵。”这茗烟无故就要欺压人的，如今得了这信，又有贾蔷助着，便一头进来找金荣。也不叫“金相公”了，只说：“姓金的，你什...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "fe95f1db-5283-4aca-933c-69d3d9c3bf23",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 15,
+          "chapter_title": "第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+          "chunk_id": "cff02e04-4c0f-4f0f-89f7-48aba73db966",
+          "score": 0.635224
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "fff164af-e2c0-47e9-badb-3a94ee72ef9a",
+          "score": 0.620698
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.25,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.495,
+        "bm25": 0.03,
+        "fusion": 0.018,
+        "rerank": 0.213,
+        "total": 8.757
+      }
+    },
+    {
+      "id": "rel1-008",
+      "question": "在第28章之前，凤姐和宝玉更接近哪种关系？",
+      "support_chapters": [
+        11,
+        28
+      ],
+      "retrieved_chapters": [
+        6,
+        10,
+        7,
+        15,
+        3,
+        4,
+        13,
+        16,
+        28,
+        22
+      ],
+      "first_rel_rank": 9,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第6章《第六回 贾宝玉初试云雨情 刘姥姥一进荣国府》中，在第与章之前存在明显互动，关系更接近“关联”。可见证据：忽见周瑞家的笑嘻嘻走过来，点手儿叫他。刘姥姥会意，于是带着板儿下炕。至堂屋中间，周瑞家的又和他咕唧了一会子，方蹭到这边屋内。只见门外铜钩上悬着大红洒花软帘，南窗下是炕，炕上大红条毡，靠东边板壁立着一个锁子锦的靠背和一个引枕，铺着金线闪的大坐...",
+      "citations": [
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "21af478b-43e1-4b11-8ce1-27a6aa2bc55a",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 10,
+          "chapter_title": "第十回 金寡妇贪利权受辱 张太医论病细穷源",
+          "chunk_id": "36efc2f7-4072-4677-8362-88d96d9de9da",
+          "score": 0.682003
+        },
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "01ceefe3-c456-4310-a030-42e7ea4d6856",
+          "score": 0.669847
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.2,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.709,
+        "bm25": 0.028,
+        "fusion": 0.016,
+        "rerank": 0.2,
+        "total": 7.954
+      }
+    },
+    {
+      "id": "rel1-009",
+      "question": "在第28章之前，黛玉和宝玉更接近哪种关系？",
+      "support_chapters": [
+        22,
+        28
+      ],
+      "retrieved_chapters": [
+        12,
+        6,
+        14,
+        23,
+        4,
+        7,
+        9,
+        22,
+        13
+      ],
+      "first_rel_rank": 8,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第12章《第十二回 王熙凤毒设相思局 贾天祥正照风月鉴》中，在第与章之前存在明显互动，关系更接近“冲突/对立”。可见证据：谁知这年冬底，林如海因为身染重疾，写书来特接黛玉回去。贾母听了，未免又加忧闷，只得忙忙的打点黛玉起身。宝玉大不自在，争奈父女之情，也不好拦阻。于是贾母定要贾琏送他去，仍叫带回来。一应土仪盘费，不消絮说，自然要妥贴的。作速择了日期，贾琏同着黛...",
+      "citations": [
+        {
+          "chapter_index": 12,
+          "chapter_title": "第十二回 王熙凤毒设相思局 贾天祥正照风月鉴",
+          "chunk_id": "ef38bf2d-a5bd-4328-b035-bca8f74dd882",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "c36d9d6e-e5e8-4c72-b2f0-8baaea9adb16",
+          "score": 0.6589
+        },
+        {
+          "chapter_index": 14,
+          "chapter_title": "第十四回 林如海灵返苏州郡 贾宝玉路谒北静王",
+          "chunk_id": "0ccd4193-1863-4f53-8308-fda684ba704b",
+          "score": 0.63773
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1429,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.275,
+        "bm25": 0.031,
+        "fusion": 0.017,
+        "rerank": 0.166,
+        "total": 7.491
+      }
+    },
+    {
+      "id": "rel1-010",
+      "question": "在第28章之前，王夫人和宝玉更接近哪种关系？",
+      "support_chapters": [
+        18,
+        28
+      ],
+      "retrieved_chapters": [
+        10,
+        6,
+        4,
+        28,
+        13,
+        21,
+        5,
+        2,
+        1
+      ],
+      "first_rel_rank": 4,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第10章《第十回 金寡妇贪利权受辱 张太医论病细穷源》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：贾蓉于是同先生到外边屋里炕上坐了。一个婆子端了茶来，贾蓉道：“先生请茶。”茶毕，问道：“先生看这脉息还治得治不得？”先生说：“看得尊夫人脉息，左寸沉数，左关沉伏，右寸细而无力，右关虚而无神。其左寸沉数者，乃心气虚而生火；左关沉伏者，乃肝家气...",
+      "citations": [
+        {
+          "chapter_index": 10,
+          "chapter_title": "第十回 金寡妇贪利权受辱 张太医论病细穷源",
+          "chunk_id": "55cb7c48-a7c1-4213-a55a-1cd7ca0fcdac",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "21af478b-43e1-4b11-8ce1-27a6aa2bc55a",
+          "score": 0.686518
+        },
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "a2e623f7-b73e-43da-a4cd-df6c0fe23a39",
+          "score": 0.659113
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.1429,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.223,
+        "bm25": 0.03,
+        "fusion": 0.018,
+        "rerank": 0.145,
+        "total": 8.416
+      }
+    },
+    {
+      "id": "rel1-011",
+      "question": "在第28章之前，宝玉和黛玉更接近哪种关系？",
+      "support_chapters": [
+        8,
+        28
+      ],
+      "retrieved_chapters": [
+        15,
+        6,
+        3,
+        4,
+        13,
+        28,
+        17
+      ],
+      "first_rel_rank": 6,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第15章《第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：凤姐听了这话，便发了兴头，说道：“你是素日知道我的，从来不信什么阴司地狱报应的，凭是什么事，我说要行就行。你叫他拿三千两银子来，我就替他出这口气。”老尼听说，喜之不胜，忙说：“有！有！这个不难。”凤姐又道：“我比不得他们扯篷拉纤的图银子。这...",
+      "citations": [
+        {
+          "chapter_index": 15,
+          "chapter_title": "第十五回 王凤姐弄权铁槛寺 秦鲸卿得趣馒头庵",
+          "chunk_id": "cff02e04-4c0f-4f0f-89f7-48aba73db966",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 6,
+          "chapter_title": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府",
+          "chunk_id": "21af478b-43e1-4b11-8ce1-27a6aa2bc55a",
+          "score": 0.686709
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "fff164af-e2c0-47e9-badb-3a94ee72ef9a",
+          "score": 0.674752
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.2,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 10.009,
+        "bm25": 0.027,
+        "fusion": 0.017,
+        "rerank": 0.237,
+        "total": 10.291
+      }
+    },
+    {
+      "id": "rel1-012",
+      "question": "在第26章之前，宝玉和袭人更接近哪种关系？",
+      "support_chapters": [
+        21,
+        26
+      ],
+      "retrieved_chapters": [
+        7,
+        19,
+        22,
+        25,
+        12,
+        26,
+        8,
+        18
+      ],
+      "first_rel_rank": 6,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第7章《第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：凤姐和贾蓉也遥遥的听见了，都装作没听见。宝玉在车上听见，因问凤姐道：“姐姐，你听他说‘爬灰的爬灰’，这是什么话？”凤姐连忙喝道：“少胡说！那是醉汉嘴里胡唚，你是什么样的人，不说没听见，还倒细问！等我回了太太，看是捶你不捶你！”吓得宝玉连忙央...",
+      "citations": [
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "52812c9f-c77e-4604-91c8-133b223ca79d",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 19,
+          "chapter_title": "第十九回 情切切良宵花解语 意绵绵静日玉生香",
+          "chunk_id": "2917b5c8-e673-4fed-b442-d9b62c6c0405",
+          "score": 0.672116
+        },
+        {
+          "chapter_index": 22,
+          "chapter_title": "第二十二回 听曲文宝玉悟禅机 制灯谜贾政悲谶语",
+          "chunk_id": "e72285ee-6619-46e1-975f-113ecf7115d6",
+          "score": 0.661644
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.2857,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.017,
+        "bm25": 0.03,
+        "fusion": 0.018,
+        "rerank": 0.365,
+        "total": 8.431
+      }
+    },
+    {
+      "id": "rel1-013",
+      "question": "在第25章之前，贾母和宝玉更接近哪种关系？",
+      "support_chapters": [
+        5,
+        25
+      ],
+      "retrieved_chapters": [
+        16,
+        4,
+        3,
+        15,
+        14,
+        22,
+        1,
+        2,
+        17
+      ],
+      "first_rel_rank": 0,
+      "recall_at": {
+        "1": 0,
+        "3": 0,
+        "5": 0,
+        "10": 0
+      },
+      "answer": "根据检索证据，在第16章《第十六回 贾元春才选凤藻宫 秦鲸卿夭逝黄泉路》中，在第与章之前存在明显互动，关系更接近“亲属/家族”。可见证据：第十六回 贾元春才选凤藻宫 秦鲸卿夭逝黄泉路  且说秦钟宝玉二人跟着凤姐自铁槛寺照应一番，坐车进城，到家见过贾母王夫人等，回到自己房中，一夜无话。至次日，宝玉见收拾了外书房，约定了和秦钟念夜书。偏偏那秦钟秉赋最弱，因在郊外受了些风霜，又与智...",
+      "citations": [
+        {
+          "chapter_index": 16,
+          "chapter_title": "第十六回 贾元春才选凤藻宫 秦鲸卿夭逝黄泉路",
+          "chunk_id": "22cf5dbc-6c14-4adc-af22-07f1d99d66b4",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "8a3b5e9d-488c-45c1-a01e-617707b8a3cd",
+          "score": 0.637314
+        },
+        {
+          "chapter_index": 3,
+          "chapter_title": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女",
+          "chunk_id": "8ed5df6f-711b-457a-9706-78424bb6208c",
+          "score": 0.615556
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.0,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 9.382,
+        "bm25": 0.039,
+        "fusion": 0.021,
+        "rerank": 0.185,
+        "total": 9.628
+      }
+    },
+    {
+      "id": "rel1-014",
+      "question": "在第23章之前，贾政和宝玉更接近哪种关系？",
+      "support_chapters": [
+        9,
+        23
+      ],
+      "retrieved_chapters": [
+        20,
+        23,
+        11,
+        14,
+        19,
+        1,
+        9,
+        8,
+        12
+      ],
+      "first_rel_rank": 2,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第20章《第二十回 王熙凤正言弹妒意 林黛玉俏语谑娇音》中，在第与章之前存在明显互动，关系更接近“关联”。可见证据：第二十回 王熙凤正言弹妒意 林黛玉俏语谑娇音  话说宝玉在黛玉房中说“耗子精”，宝钗撞来，讽刺宝玉元宵不知“绿蜡”之典，三人正在房中互相取笑。那宝玉恐黛玉饭后贪眠，一时存了食，或夜间走了困，身体不好；幸而宝钗走来，大家谈笑，那黛玉方不欲睡，...",
+      "citations": [
+        {
+          "chapter_index": 20,
+          "chapter_title": "第二十回 王熙凤正言弹妒意 林黛玉俏语谑娇音",
+          "chunk_id": "d8089d15-7975-41f6-8cbb-05591c01aef3",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 23,
+          "chapter_title": "第二十三回 西厢记妙词通戏语 牡丹亭艳曲警芳心",
+          "chunk_id": "ff527c21-448c-455c-bf4a-61ec005b0fa2",
+          "score": 0.673046
+        },
+        {
+          "chapter_index": 11,
+          "chapter_title": "第十一回 庆寿辰宁府排家宴 见熙凤贾瑞起淫心",
+          "chunk_id": "fe9d66a8-8d0e-4929-a40e-7dd11c309a7e",
+          "score": 0.629435
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.0,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 7.911,
+        "bm25": 0.029,
+        "fusion": 0.016,
+        "rerank": 0.147,
+        "total": 8.103
+      }
+    },
+    {
+      "id": "rel1-015",
+      "question": "在第22章之前，贾琏和凤姐更接近哪种关系？",
+      "support_chapters": [
+        7,
+        22
+      ],
+      "retrieved_chapters": [
+        9,
+        7,
+        4,
+        6,
+        20,
+        18,
+        1,
+        17
+      ],
+      "first_rel_rank": 2,
+      "recall_at": {
+        "1": 0,
+        "3": 1,
+        "5": 1,
+        "10": 1
+      },
+      "answer": "根据检索证据，在第9章《第九回 恋风流情友入家塾 起嫌疑顽童闹学堂》中，在第与章之前存在明显互动，关系更接近“主仆”。可见证据：这里茗烟走进来，便一把揪住金荣问道：“我们胔屁股不胔，管你相干？横竖没胔你的爹罢了！说你是好小子，出来动一动你茗大爷！”吓的满屋中子弟都忙忙的痴望。贾瑞忙喝：“茗烟不得撒野！”金荣气黄了脸，说：“反了！奴才小子都敢如此，我只和你主子说。...",
+      "citations": [
+        {
+          "chapter_index": 9,
+          "chapter_title": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂",
+          "chunk_id": "3125074a-3628-4ff4-9117-7011c6da57bb",
+          "score": 0.7
+        },
+        {
+          "chapter_index": 7,
+          "chapter_title": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟",
+          "chunk_id": "7f6c93b5-8d6a-406b-b8bd-e7ff81ec1b56",
+          "score": 0.647588
+        },
+        {
+          "chapter_index": 4,
+          "chapter_title": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案",
+          "chunk_id": "b762c458-77a5-4c72-b3b4-f40de88f718b",
+          "score": 0.630081
+        }
+      ],
+      "generation_accuracy_keyword": false,
+      "generation_accuracy_llm_reason": "llm_judge_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "citation_accuracy": 0.3333,
+      "unsupported_claim_rate": 0.125,
+      "grounding_llm_reason": "llm_ground_error: 401 Client Error: Authorization Required for url: https://open.xiaojingai.com/v1/chat/completions",
+      "latency_ms": {
+        "dense": 8.673,
+        "bm25": 0.024,
+        "fusion": 0.015,
+        "rerank": 0.149,
+        "total": 8.861
+      }
+    }
+  ]
+}

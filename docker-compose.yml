@@ -92,7 +92,7 @@ services:
       celery -A app.worker.celery_app.celery_app worker
       --loglevel=info
       --concurrency=1
-      -Q default,ingest,embed,image
+      -Q default,ingest,embed,image,visual
     volumes:
       - ./backend:/app
     depends_on:

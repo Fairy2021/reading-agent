@@ -1,0 +1,10 @@
+{"id": "qa-001", "question": "第1回的标题是什么？", "chapter_index": 1, "support_chapters": [1], "reference_answer": "第一回 甄士隐梦幻识通灵 贾雨村风尘怀闺秀", "answer_keywords": ["第一回", "甄士隐梦幻识通灵"], "metadata": {"type": "title_qa"}}
+{"id": "qa-002", "question": "第2回的标题是什么？", "chapter_index": 2, "support_chapters": [2], "reference_answer": "第二回 贾夫人仙逝扬州城 冷子兴演说荣国府", "answer_keywords": ["第二回", "贾夫人仙逝扬州城"], "metadata": {"type": "title_qa"}}
+{"id": "qa-003", "question": "第3回的标题是什么？", "chapter_index": 3, "support_chapters": [3], "reference_answer": "第三回 托内兄如海荐西宾 接外孙贾母惜孤女", "answer_keywords": ["第三回", "托内兄如海荐西宾"], "metadata": {"type": "title_qa"}}
+{"id": "qa-004", "question": "第4回的标题是什么？", "chapter_index": 4, "support_chapters": [4], "reference_answer": "第四回 薄命女偏逢薄命郎 葫芦僧判断葫芦案", "answer_keywords": ["第四回", "薄命女偏逢薄命郎"], "metadata": {"type": "title_qa"}}
+{"id": "qa-005", "question": "第5回的标题是什么？", "chapter_index": 5, "support_chapters": [5], "reference_answer": "第五回 游幻境指迷十二钗 饮仙醪曲演红楼梦", "answer_keywords": ["第五回", "游幻境指迷十二钗"], "metadata": {"type": "title_qa"}}
+{"id": "qa-006", "question": "第6回的标题是什么？", "chapter_index": 6, "support_chapters": [6], "reference_answer": "第六回 贾宝玉初试云雨情 刘姥姥一进荣国府", "answer_keywords": ["第六回", "贾宝玉初试云雨情"], "metadata": {"type": "title_qa"}}
+{"id": "qa-007", "question": "第7回的标题是什么？", "chapter_index": 7, "support_chapters": [7], "reference_answer": "第七回 送宫花贾琏戏熙凤 宴宁府宝玉会秦钟", "answer_keywords": ["第七回", "送宫花贾琏戏熙凤"], "metadata": {"type": "title_qa"}}
+{"id": "qa-008", "question": "第8回的标题是什么？", "chapter_index": 8, "support_chapters": [8], "reference_answer": "第八回 比通灵金莺微露意 探宝钗黛玉半含酸", "answer_keywords": ["第八回", "比通灵金莺微露意"], "metadata": {"type": "title_qa"}}
+{"id": "qa-009", "question": "第9回的标题是什么？", "chapter_index": 9, "support_chapters": [9], "reference_answer": "第九回 恋风流情友入家塾 起嫌疑顽童闹学堂", "answer_keywords": ["第九回", "恋风流情友入家塾"], "metadata": {"type": "title_qa"}}
+{"id": "qa-010", "question": "第10回的标题是什么？", "chapter_index": 10, "support_chapters": [10], "reference_answer": "第十回 金寡妇贪利权受辱 张太医论病细穷源", "answer_keywords": ["第十回", "金寡妇贪利权受辱"], "metadata": {"type": "title_qa"}}

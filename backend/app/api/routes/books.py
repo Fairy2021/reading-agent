@@ -10,9 +10,11 @@ from sqlalchemy.orm import Session, aliased, selectinload
 from app.core.config import settings
 from app.db.session import get_db
 from app.models import (
+    AssetJob,
     Book,
     Chapter,
     Character,
+    MediaAsset,
     CharacterPortrait,
     CharacterState,
     RelationshipEdge,
@@ -24,6 +26,12 @@ from app.schemas.book import (
     ChapterDetailResponse,
     ChapterSummaryResponse,
     EnqueueResponse,
+    MediaAssetResponse,
+    VisualJobCreateResponse,
+    VisualJobCreateRequest,
+    VisualJobStatusResponse,
+    VisualStyleProfileResponse,
+    VisualStyleProfileUpdateRequest,
 )
 from app.schemas.character import (
     CharacterCardResponse,
@@ -42,8 +50,10 @@ from app.tasks.ingest import (
     ingest_book_task,
     run_book_skills_task,
 )
+from app.tasks.visual import generate_visual_asset_task
 from app.skills.character_portrait_unlock import build_style_prompt
 from app.worker.celery_app import celery_app
+from app.tools import ensure_visual_style_profile
 
 router = APIRouter()
 
@@ -448,3 +458,252 @@ def enqueue_character_portrait_generation(
 
     task = generate_portrait_task.delay(portrait_id=portrait.id)
     return EnqueueResponse(task_id=task.id, book_id=book_id, status="queued")
+
+
+@router.post("/{book_id}/visual/portrait/jobs/{character_id}", response_model=VisualJobCreateResponse)
+def enqueue_visual_portrait_job(
+    book_id: str,
+    character_id: str,
+    chapter_index: int | None = None,
+    db: Session = Depends(get_db),
+) -> VisualJobCreateResponse:
+    book = db.get(Book, book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    character = db.get(Character, character_id)
+    if not character or character.book_id != book_id:
+        raise HTTPException(status_code=404, detail="Character not found")
+
+    requested_chapter = chapter_index or character.first_chapter_index or 1
+    idempotency_key = f"portrait:{book_id}:{character_id}:{requested_chapter}"
+    existing = db.execute(
+        select(AssetJob).where(
+            AssetJob.book_id == book_id,
+            AssetJob.idempotency_key == idempotency_key,
+        )
+    ).scalars().first()
+    if existing and existing.status in {"queued", "running", "completed"}:
+        return VisualJobCreateResponse(
+            task_id=existing.task_id,
+            job_id=existing.id,
+            book_id=book_id,
+            status=existing.status,
+        )
+
+    db.refresh(character, attribute_names=["card", "evidences"])
+    prompt = build_style_prompt(character)
+    if existing:
+        existing.asset_type = "portrait"
+        existing.character_id = character_id
+        existing.chapter_index = requested_chapter
+        existing.style_prompt = prompt
+        existing.status = "queued"
+        existing.error_message = ""
+        job = existing
+    else:
+        job = AssetJob(
+            book_id=book_id,
+            character_id=character_id,
+            asset_type="portrait",
+            chapter_index=requested_chapter,
+            style_prompt=prompt,
+            status="queued",
+            priority=5,
+            idempotency_key=idempotency_key,
+        )
+        db.add(job)
+    db.commit()
+    db.refresh(job)
+
+    task = generate_visual_asset_task.delay(job_id=job.id)
+    job.task_id = task.id
+    db.commit()
+    db.refresh(job)
+    return VisualJobCreateResponse(task_id=task.id, job_id=job.id, book_id=book_id, status=job.status)
+
+
+@router.post("/{book_id}/visual/jobs", response_model=VisualJobCreateResponse)
+def enqueue_visual_job(
+    book_id: str,
+    payload: VisualJobCreateRequest,
+    db: Session = Depends(get_db),
+) -> VisualJobCreateResponse:
+    book = db.get(Book, book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    if payload.asset_type not in {"portrait", "character_card", "scene"}:
+        raise HTTPException(status_code=400, detail="asset_type not supported")
+    if payload.asset_type in {"portrait", "character_card"} and not payload.character_id:
+        raise HTTPException(status_code=400, detail="character_id is required")
+
+    character = None
+    if payload.character_id:
+        character = db.get(Character, payload.character_id)
+        if not character or character.book_id != book_id:
+            raise HTTPException(status_code=404, detail="Character not found")
+
+    chapter_index = payload.chapter_index or (character.first_chapter_index if character else 1) or 1
+    style_prompt = (payload.style_prompt or "").strip()
+    if not style_prompt and character and payload.asset_type in {"portrait", "character_card"}:
+        db.refresh(character, attribute_names=["card", "evidences"])
+        style_prompt = build_style_prompt(character)
+
+    idem_character = payload.character_id or "none"
+    idempotency_key = f"{payload.asset_type}:{book_id}:{idem_character}:{chapter_index}:{hash(style_prompt)}"
+    existing = db.execute(
+        select(AssetJob).where(
+            AssetJob.book_id == book_id,
+            AssetJob.idempotency_key == idempotency_key,
+        )
+    ).scalars().first()
+    if existing and existing.status in {"queued", "running", "completed"}:
+        return VisualJobCreateResponse(
+            task_id=existing.task_id,
+            job_id=existing.id,
+            book_id=book_id,
+            status=existing.status,
+        )
+
+    if existing:
+        job = existing
+        job.asset_type = payload.asset_type
+        job.character_id = payload.character_id
+        job.chapter_index = chapter_index
+        job.style_prompt = style_prompt
+        job.status = "queued"
+        job.priority = payload.priority
+        job.error_message = ""
+    else:
+        job = AssetJob(
+            book_id=book_id,
+            character_id=payload.character_id,
+            asset_type=payload.asset_type,
+            chapter_index=chapter_index,
+            style_prompt=style_prompt,
+            status="queued",
+            priority=payload.priority,
+            idempotency_key=idempotency_key,
+        )
+        db.add(job)
+    db.commit()
+    db.refresh(job)
+
+    task = generate_visual_asset_task.delay(job_id=job.id)
+    job.task_id = task.id
+    db.commit()
+    db.refresh(job)
+    return VisualJobCreateResponse(task_id=task.id, job_id=job.id, book_id=book_id, status=job.status)
+
+
+@router.get("/{book_id}/visual/jobs/{job_id}", response_model=VisualJobStatusResponse)
+def get_visual_job_status(
+    book_id: str,
+    job_id: str,
+    db: Session = Depends(get_db),
+) -> VisualJobStatusResponse:
+    job = db.get(AssetJob, job_id)
+    if not job or job.book_id != book_id:
+        raise HTTPException(status_code=404, detail="Visual job not found")
+
+    if job.task_id and job.status in {"queued", "running"}:
+        result = AsyncResult(job.task_id, app=celery_app)
+        if result.ready() and job.status != "completed":
+            refreshed = db.get(AssetJob, job_id)
+            job = refreshed or job
+
+    return VisualJobStatusResponse(
+        job_id=job.id,
+        book_id=job.book_id,
+        asset_type=job.asset_type,
+        status=job.status,
+        task_id=job.task_id,
+        result_asset_id=job.result_asset_id,
+        error_message=job.error_message or "",
+    )
+
+
+@router.get("/{book_id}/visual/assets", response_model=list[MediaAssetResponse])
+def list_media_assets(
+    book_id: str,
+    asset_type: str | None = None,
+    character_id: str | None = None,
+    db: Session = Depends(get_db),
+) -> list[MediaAssetResponse]:
+    book = db.get(Book, book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    stmt = select(MediaAsset).where(MediaAsset.book_id == book_id)
+    if asset_type:
+        stmt = stmt.where(MediaAsset.asset_type == asset_type)
+    if character_id:
+        stmt = stmt.where(MediaAsset.character_id == character_id)
+    rows = db.execute(stmt.order_by(MediaAsset.updated_at.desc(), MediaAsset.version.desc())).scalars().all()
+    return [
+        MediaAssetResponse(
+            id=item.id,
+            book_id=item.book_id,
+            character_id=item.character_id,
+            asset_type=item.asset_type,
+            chapter_index=item.chapter_index,
+            status=item.status,
+            style_prompt=item.style_prompt,
+            storage_url=item.storage_url,
+            generator=item.generator,
+            version=item.version,
+        )
+        for item in rows
+    ]
+
+
+@router.get("/{book_id}/visual/style-profile", response_model=VisualStyleProfileResponse)
+def get_visual_style_profile(book_id: str, db: Session = Depends(get_db)) -> VisualStyleProfileResponse:
+    book = db.get(Book, book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    profile = ensure_visual_style_profile(db, book_id=book_id)
+    return VisualStyleProfileResponse(
+        id=profile.id,
+        book_id=profile.book_id,
+        style_name=profile.style_name,
+        palette=profile.palette,
+        brush=profile.brush,
+        mood=profile.mood,
+        negative_prompt=profile.negative_prompt,
+        locked=profile.locked,
+    )
+
+
+@router.put("/{book_id}/visual/style-profile", response_model=VisualStyleProfileResponse)
+def update_visual_style_profile(
+    book_id: str,
+    payload: VisualStyleProfileUpdateRequest,
+    db: Session = Depends(get_db),
+) -> VisualStyleProfileResponse:
+    book = db.get(Book, book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+    profile = ensure_visual_style_profile(db, book_id=book_id)
+    if payload.style_name is not None:
+        profile.style_name = payload.style_name
+    if payload.palette is not None:
+        profile.palette = payload.palette
+    if payload.brush is not None:
+        profile.brush = payload.brush
+    if payload.mood is not None:
+        profile.mood = payload.mood
+    if payload.negative_prompt is not None:
+        profile.negative_prompt = payload.negative_prompt
+    if payload.locked is not None:
+        profile.locked = payload.locked
+    db.commit()
+    db.refresh(profile)
+    return VisualStyleProfileResponse(
+        id=profile.id,
+        book_id=profile.book_id,
+        style_name=profile.style_name,
+        palette=profile.palette,
+        brush=profile.brush,
+        mood=profile.mood,
+        negative_prompt=profile.negative_prompt,
+        locked=profile.locked,
+    )

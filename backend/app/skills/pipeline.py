@@ -6,8 +6,10 @@ from app.skills.character_discovery import CharacterDiscoverySkill
 from app.skills.character_normalization import CharacterNormalizationSkill
 from app.skills.character_portrait_unlock import CharacterPortraitUnlockSkill
 from app.skills.character_refinement import CharacterRefinementSkill
+from app.skills.dialogue_constraint import DialogueConstraintSkill
 from app.skills.relationship_graph import RelationshipGraphSkill
 from app.skills.relationship_state import RelationshipStateSkill
+from app.skills.story_progression import StoryProgressionSkill
 
 SKILL_REGISTRY: dict[str, BookSkill] = {
     "character_discovery": CharacterDiscoverySkill(),
@@ -16,6 +18,8 @@ SKILL_REGISTRY: dict[str, BookSkill] = {
     "character_card_build": CharacterCardSkill(),
     "relationship_state_build": RelationshipStateSkill(),
     "relationship_graph_build": RelationshipGraphSkill(),
+    "story_progression_build": StoryProgressionSkill(),
+    "dialogue_constraint_build": DialogueConstraintSkill(),
     "character_portrait_unlock_build": CharacterPortraitUnlockSkill(),
 }
 
@@ -26,6 +30,8 @@ DEFAULT_SKILLS = [
     "character_card_build",
     "relationship_state_build",
     "relationship_graph_build",
+    "story_progression_build",
+    "dialogue_constraint_build",
     "character_portrait_unlock_build",
 ]
 

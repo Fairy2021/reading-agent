@@ -8,10 +8,11 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.core.config import settings
 from app.db.session import get_db
-from app.models import Book, Character, CharacterAlias, CharacterState, SessionMemory
+from app.models import Book, Character, CharacterAlias, CharacterState, DialogueConstraint, SessionMemory
 from app.schemas.chat import ChatRequest, ChatResponse, Citation
+from app.services.agent_orchestrator import build_plan, execute_react
 from app.services.llm_chat import guard_and_rewrite_answer, request_roleplay_completion
-from app.services.rag import get_book_max_chapter_index, retrieve_story_evidence
+from app.services.rag import get_book_max_chapter_index
 
 router = APIRouter()
 
@@ -39,7 +40,7 @@ def _fallback_persona_answer(
     if not evidence_snippets:
         return (
             f"{opening}\n\n"
-            f"以{role_name}的立场，我愿意继续陪你聊。"
+            f"以 {role_name} 的立场，我愿意继续陪你聊。"
             "但当前可用证据不足，我不想编造超出文本的信息。"
         )
 
@@ -132,24 +133,26 @@ def role_chat(payload: ChatRequest, db: Session = Depends(get_db)) -> ChatRespon
     if progress_index > max_available:
         progress_index = max_available
 
-    evidences = retrieve_story_evidence(
+    plan = build_plan(payload.message, payload.role_name)
+    exec_result = execute_react(
         db,
         book_id=payload.book_id,
-        query=payload.message,
-        max_chapter_index=progress_index,
+        message=payload.message,
+        progress_index=progress_index,
+        plan=plan,
     )
     citations = [
         Citation(
-            chapter_index=e.chapter_index,
-            chapter_title=e.chapter_title,
-            chunk_id=e.chunk_id,
-            chunk_index=e.chunk_index,
-            score=round(e.score, 4),
-            preview=e.content[:180],
+            chapter_index=e["chapter_index"],
+            chapter_title=e["chapter_title"],
+            chunk_id=e["chunk_id"],
+            chunk_index=e["chunk_index"],
+            score=float(e["score"]),
+            preview=e["preview"],
         )
-        for e in evidences
+        for e in exec_result.citations
     ]
-    evidence_snippets = [f"第{e.chapter_index}章《{e.chapter_title}》：{e.content[:120]}..." for e in evidences]
+    evidence_snippets = exec_result.evidence_snippets
 
     role_style_hint = DEFAULT_ROLE_STYLE.get(payload.role_name, DEFAULT_ROLE_STYLE["Narrator"])
     role_character = None
@@ -199,6 +202,23 @@ def role_chat(payload: ChatRequest, db: Session = Depends(get_db)) -> ChatRespon
             .limit(1)
         ).scalars().first()
     persona_state_text = _build_persona_state_text(role_state)
+
+    dialog_constraint = db.execute(
+        select(DialogueConstraint)
+        .where(
+            DialogueConstraint.book_id == payload.book_id,
+            DialogueConstraint.chapter_index <= progress_index,
+        )
+        .order_by(DialogueConstraint.chapter_index.desc())
+        .limit(1)
+    ).scalars().first()
+    if dialog_constraint:
+        role_style_hint = (
+            f"{role_style_hint}\n"
+            f"对话约束:{dialog_constraint.allowed_scope} "
+            f"{dialog_constraint.blocked_topics} "
+            f"{dialog_constraint.roleplay_policy}"
+        ).strip()
 
     session_id = payload.session_id or str(uuid.uuid4())
     memory_row = db.execute(
@@ -256,7 +276,7 @@ def role_chat(payload: ChatRequest, db: Session = Depends(get_db)) -> ChatRespon
     )
     db.commit()
 
-    spoiler_risk = "low (progress-guarded)"
+    spoiler_risk = f"low (progress-guarded) | agent={plan.intent}"
     if guard_applied:
         spoiler_risk = f"guarded ({guard_reason})"
 

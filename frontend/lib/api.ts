@@ -157,6 +157,44 @@ export interface ChatResponse {
   session_id?: string | null;
 }
 
+export interface VisualJobCreateResponse {
+  task_id: string;
+  job_id: string;
+  book_id: string;
+  status: string;
+}
+
+export interface VisualJobCreateRequest {
+  asset_type: "portrait" | "character_card" | "scene";
+  character_id?: string;
+  chapter_index?: number;
+  style_prompt?: string;
+  priority?: number;
+}
+
+export interface VisualJobStatusResponse {
+  job_id: string;
+  book_id: string;
+  asset_type: string;
+  status: string;
+  task_id: string;
+  result_asset_id?: string | null;
+  error_message: string;
+}
+
+export interface MediaAsset {
+  id: string;
+  book_id: string;
+  character_id?: string | null;
+  asset_type: string;
+  chapter_index?: number | null;
+  status: string;
+  style_prompt: string;
+  storage_url: string;
+  generator: string;
+  version: number;
+}
+
 interface ApiErrorPayload {
   detail?: string;
   message?: string;
@@ -324,6 +362,57 @@ export function triggerCharacterPortraitGenerate(
     `/api/books/${encodeURIComponent(bookId)}/characters/${encodeURIComponent(characterId)}/portrait/generate`,
     {
       method: "POST"
+    }
+  );
+}
+
+export function enqueueVisualPortraitJob(
+  bookId: string,
+  characterId: string,
+  chapterIndex?: number | null
+): Promise<VisualJobCreateResponse> {
+  const query = chapterIndex ? `?chapter_index=${chapterIndex}` : "";
+  return requestJson<VisualJobCreateResponse>(
+    `/api/books/${encodeURIComponent(bookId)}/visual/portrait/jobs/${encodeURIComponent(characterId)}${query}`,
+    { method: "POST" }
+  );
+}
+
+export function getVisualJobStatus(
+  bookId: string,
+  jobId: string
+): Promise<VisualJobStatusResponse> {
+  return requestJson<VisualJobStatusResponse>(
+    `/api/books/${encodeURIComponent(bookId)}/visual/jobs/${encodeURIComponent(jobId)}`,
+    { method: "GET" }
+  );
+}
+
+export function listMediaAssets(
+  bookId: string,
+  assetType?: string,
+  characterId?: string
+): Promise<MediaAsset[]> {
+  const params = new URLSearchParams();
+  if (assetType) params.set("asset_type", assetType);
+  if (characterId) params.set("character_id", characterId);
+  const query = params.toString() ? `?${params.toString()}` : "";
+  return requestJson<MediaAsset[]>(
+    `/api/books/${encodeURIComponent(bookId)}/visual/assets${query}`,
+    { method: "GET" }
+  );
+}
+
+export function enqueueVisualJob(
+  bookId: string,
+  payload: VisualJobCreateRequest
+): Promise<VisualJobCreateResponse> {
+  return requestJson<VisualJobCreateResponse>(
+    `/api/books/${encodeURIComponent(bookId)}/visual/jobs`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
     }
   );
 }
