@@ -23,6 +23,13 @@ class Settings(BaseSettings):
     openai_embedding_model: str = "text-embedding-3-small"
     llm_timeout_seconds: int = 30
 
+    embedding_provider: str = "local"
+    embedding_api_base_url: str = ""
+    embedding_api_key: str = ""
+    embedding_model: str = "text-embedding-3-small"
+    embedding_dimensions: int = 1536
+    embedding_timeout_seconds: int = 30
+
     rag_embedding_dim: int = 1536
     rag_chunk_size: int = 700
     rag_chunk_overlap: int = 120
@@ -47,6 +54,8 @@ class Settings(BaseSettings):
     skill_refine_llm_enabled: bool = True
     skill_refine_llm_max_candidates: int = 40
     skill_refine_merge_ratio: float = 1.0
+    skill_denoise_llm_enabled: bool = True
+    skill_denoise_llm_max_candidates: int = 120
 
     chat_session_memory_max_chars: int = 900
     chat_guard_enabled: bool = True
@@ -57,6 +66,7 @@ class Settings(BaseSettings):
     portrait_api_timeout_seconds: int = 45
     portrait_api_seed_field: str = "seed"
     portrait_api_prompt_field: str = "prompt"
+    portrait_model: str = "gemini-3-pro-image-preview"
     portrait_api_response_url_field: str = "image_url"
     portrait_generator_name: str = "external_image_api"
     portrait_cache_enabled: bool = True

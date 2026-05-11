@@ -1,6 +1,16 @@
 export const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:8000";
 
+export function resolveAssetUrl(pathOrUrl?: string | null): string {
+  if (!pathOrUrl) return "";
+  const value = pathOrUrl.trim();
+  if (!value) return "";
+  if (/^https?:\/\//i.test(value)) return value;
+  if (value.startsWith("//")) return `http:${value}`;
+  if (value.startsWith("/")) return `${API_BASE_URL}${value}`;
+  return `${API_BASE_URL}/${value}`;
+}
+
 export type TaskState = "PENDING" | "STARTED" | "RETRY" | "SUCCESS" | "FAILURE";
 
 export interface HealthResponse {
@@ -369,9 +379,13 @@ export function triggerCharacterPortraitGenerate(
 export function enqueueVisualPortraitJob(
   bookId: string,
   characterId: string,
-  chapterIndex?: number | null
+  chapterIndex?: number | null,
+  progressChapter?: number | null
 ): Promise<VisualJobCreateResponse> {
-  const query = chapterIndex ? `?chapter_index=${chapterIndex}` : "";
+  const params = new URLSearchParams();
+  if (chapterIndex) params.set("chapter_index", String(chapterIndex));
+  if (progressChapter) params.set("progress_chapter", String(progressChapter));
+  const query = params.toString() ? `?${params.toString()}` : "";
   return requestJson<VisualJobCreateResponse>(
     `/api/books/${encodeURIComponent(bookId)}/visual/portrait/jobs/${encodeURIComponent(characterId)}${query}`,
     { method: "POST" }
@@ -414,5 +428,12 @@ export function enqueueVisualJob(
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
     }
+  );
+}
+
+export function bootstrapTopPortraits(bookId: string, limit = 5): Promise<{ book_id: string; limit: number; enqueued: number }> {
+  return requestJson<{ book_id: string; limit: number; enqueued: number }>(
+    `/api/books/${encodeURIComponent(bookId)}/visual/portraits/bootstrap?limit=${limit}`,
+    { method: "POST" }
   );
 }

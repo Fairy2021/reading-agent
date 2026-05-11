@@ -50,6 +50,40 @@ def _extract_image_url(payload: dict[str, Any]) -> str:
     return ""
 
 
+def _extract_from_chat_choice(payload: dict[str, Any]) -> str:
+    choices = payload.get("choices")
+    if not isinstance(choices, list) or not choices:
+        return ""
+    first = choices[0] if isinstance(choices[0], dict) else {}
+    message = first.get("message") if isinstance(first, dict) else {}
+    if not isinstance(message, dict):
+        return ""
+    content = message.get("content")
+
+    if isinstance(content, str):
+        md = re.search(r"\((https?://[^)\s]+)\)", content)
+        if md:
+            return md.group(1).strip()
+        direct = re.search(r"https?://\S+", content)
+        if direct:
+            return direct.group(0).strip().rstrip(".,;")
+        return ""
+
+    if isinstance(content, list):
+        for part in content:
+            if not isinstance(part, dict):
+                continue
+            image_url = part.get("image_url")
+            if isinstance(image_url, str) and image_url.strip():
+                return image_url.strip()
+            text = part.get("text")
+            if isinstance(text, str):
+                direct = re.search(r"https?://\S+", text)
+                if direct:
+                    return direct.group(0).strip().rstrip(".,;")
+    return ""
+
+
 def image_generate_tool(prompt: str, seed: int) -> dict[str, str]:
     if not settings.portrait_api_url:
         safe_prompt = quote_plus(_fallback_short_prompt(prompt))
@@ -63,10 +97,26 @@ def image_generate_tool(prompt: str, seed: int) -> dict[str, str]:
     if settings.portrait_api_token:
         headers["Authorization"] = f"Bearer {settings.portrait_api_token}"
 
-    payload = {
-        settings.portrait_api_prompt_field: prompt,
-        settings.portrait_api_seed_field: seed,
-    }
+    is_chat_completions = settings.portrait_api_url.rstrip("/").endswith("/chat/completions")
+    if is_chat_completions:
+        payload = {
+            "model": settings.portrait_model,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": (
+                        f"{prompt}\n\n"
+                        "请直接生成一张高清中国古风人物立绘，半身像，背景干净。"
+                    ),
+                }
+            ],
+            "temperature": 0.6,
+        }
+    else:
+        payload = {
+            settings.portrait_api_prompt_field: prompt,
+            settings.portrait_api_seed_field: seed,
+        }
 
     try:
         resp = requests.post(
@@ -91,6 +141,8 @@ def image_generate_tool(prompt: str, seed: int) -> dict[str, str]:
         raise RuntimeError("Portrait API returned unexpected payload")
 
     image_url = _extract_image_url(result)
+    if not image_url:
+        image_url = _extract_from_chat_choice(result)
     if not image_url:
         raise RuntimeError("Portrait API response does not contain image URL")
 

@@ -9,6 +9,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.core.config import settings
 from app.models import Chapter, Character, CharacterAlias, CharacterEvidence
+from app.services.character_name_filter import is_noise_like_character_name, sanitize_character_name
 from app.services.llm_extract import extract_characters_from_text
 from app.skills.base import SkillResult
 
@@ -59,7 +60,7 @@ def _compute_confidence(*, mention_count: int, max_mention_count: int, alias_cou
 
 
 def _normalize_name(name: str) -> str:
-    return PUNCTUATION_PATTERN.sub("", name).strip()
+    return sanitize_character_name(PUNCTUATION_PATTERN.sub("", name).strip())
 
 
 def _is_valid_name(name: str) -> bool:
@@ -72,6 +73,8 @@ def _is_valid_name(name: str) -> bool:
     if not NAME_ALLOWED_PATTERN.match(name):
         return False
     if len(name) >= 3 and name[-1] in NOISE_SUFFIXES:
+        return False
+    if is_noise_like_character_name(name):
         return False
     return True
 
@@ -423,4 +426,3 @@ class CharacterDiscoverySkill:
                 "fallback_used_chapters": fallback_used_chapters,
             },
         )
-

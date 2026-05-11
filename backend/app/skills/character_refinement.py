@@ -7,6 +7,7 @@ from sqlalchemy.orm import Session, selectinload
 
 from app.core.config import settings
 from app.models import Character, CharacterAlias, CharacterEvidence, CharacterState
+from app.services.character_name_filter import is_noise_like_character_name
 from app.services.llm_extract import verify_character_candidates
 from app.skills.base import SkillResult
 
@@ -51,6 +52,8 @@ NARRATIVE_FRAGMENT_PATTERN = re.compile(r"^(便|因|都|又|只|且|遂|方|忽|
 
 
 def _is_noise_like(name: str) -> bool:
+    if is_noise_like_character_name(name):
+        return True
     if not name:
         return True
     if name in EXACT_NOISE_NAMES:
@@ -256,4 +259,3 @@ class CharacterRefinementSkill:
                 "llm_unverified_count": llm_unverified_count,
             },
         )
-

@@ -47,6 +47,18 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://open.xiaojingai.com/v1}
       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      PORTRAIT_API_URL: ${PORTRAIT_API_URL:-}
+      PORTRAIT_API_TOKEN: ${PORTRAIT_API_TOKEN:-}
+      PORTRAIT_API_TIMEOUT_SECONDS: ${PORTRAIT_API_TIMEOUT_SECONDS:-120}
+      PORTRAIT_MODEL: ${PORTRAIT_MODEL:-gemini-3-pro-image-preview}
+      PORTRAIT_GENERATOR_NAME: ${PORTRAIT_GENERATOR_NAME:-external_image_api}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-local}
+      EMBEDDING_API_BASE_URL: ${EMBEDDING_API_BASE_URL:-}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-text-embedding-3-small}
+      EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-1536}
+      EMBEDDING_TIMEOUT_SECONDS: ${EMBEDDING_TIMEOUT_SECONDS:-30}
       HTTP_PROXY: ""
       HTTPS_PROXY: ""
       http_proxy: ""
@@ -82,6 +94,18 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}
       OPENAI_BASE_URL: ${OPENAI_BASE_URL:-https://open.xiaojingai.com/v1}
       OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-small}
+      PORTRAIT_API_URL: ${PORTRAIT_API_URL:-}
+      PORTRAIT_API_TOKEN: ${PORTRAIT_API_TOKEN:-}
+      PORTRAIT_API_TIMEOUT_SECONDS: ${PORTRAIT_API_TIMEOUT_SECONDS:-120}
+      PORTRAIT_MODEL: ${PORTRAIT_MODEL:-gemini-3-pro-image-preview}
+      PORTRAIT_GENERATOR_NAME: ${PORTRAIT_GENERATOR_NAME:-external_image_api}
+      EMBEDDING_PROVIDER: ${EMBEDDING_PROVIDER:-local}
+      EMBEDDING_API_BASE_URL: ${EMBEDDING_API_BASE_URL:-}
+      EMBEDDING_API_KEY: ${EMBEDDING_API_KEY:-}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-text-embedding-3-small}
+      EMBEDDING_DIMENSIONS: ${EMBEDDING_DIMENSIONS:-1536}
+      EMBEDDING_TIMEOUT_SECONDS: ${EMBEDDING_TIMEOUT_SECONDS:-30}
       HTTP_PROXY: ""
       HTTPS_PROXY: ""
       http_proxy: ""
@@ -109,6 +133,7 @@ services:
     restart: unless-stopped
     environment:
       NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+      INTERNAL_API_BASE_URL: ${INTERNAL_API_BASE_URL:-http://api:8000}
     command: ["npm", "run", "dev", "--", "-H", "0.0.0.0", "-p", "3000"]
     volumes:
       - ./frontend:/app

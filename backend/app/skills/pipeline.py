@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from app.skills.base import BookSkill, SkillResult
 from app.skills.character_card import CharacterCardSkill
+from app.skills.character_denoise import CharacterDenoiseSkill
 from app.skills.character_discovery import CharacterDiscoverySkill
 from app.skills.character_normalization import CharacterNormalizationSkill
 from app.skills.character_portrait_unlock import CharacterPortraitUnlockSkill
@@ -15,6 +16,7 @@ SKILL_REGISTRY: dict[str, BookSkill] = {
     "character_discovery": CharacterDiscoverySkill(),
     "character_normalization_build": CharacterNormalizationSkill(),
     "character_refinement_build": CharacterRefinementSkill(),
+    "character_denoise_build": CharacterDenoiseSkill(),
     "character_card_build": CharacterCardSkill(),
     "relationship_state_build": RelationshipStateSkill(),
     "relationship_graph_build": RelationshipGraphSkill(),
@@ -27,6 +29,7 @@ DEFAULT_SKILLS = [
     "character_discovery",
     "character_normalization_build",
     "character_refinement_build",
+    "character_denoise_build",
     "character_card_build",
     "relationship_state_build",
     "relationship_graph_build",

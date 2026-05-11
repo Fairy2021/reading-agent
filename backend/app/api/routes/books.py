@@ -1,6 +1,7 @@
 import os
 import uuid
 from pathlib import Path
+from datetime import datetime, timedelta, timezone
 
 from celery.result import AsyncResult
 from fastapi import APIRouter, Depends, File, Form, HTTPException, UploadFile
@@ -465,6 +466,7 @@ def enqueue_visual_portrait_job(
     book_id: str,
     character_id: str,
     chapter_index: int | None = None,
+    progress_chapter: int | None = None,
     db: Session = Depends(get_db),
 ) -> VisualJobCreateResponse:
     book = db.get(Book, book_id)
@@ -473,8 +475,14 @@ def enqueue_visual_portrait_job(
     character = db.get(Character, character_id)
     if not character or character.book_id != book_id:
         raise HTTPException(status_code=404, detail="Character not found")
+    unlock_chapter = character.first_chapter_index or 1
+    if progress_chapter is not None and progress_chapter < unlock_chapter:
+        raise HTTPException(
+            status_code=403,
+            detail=f"Character is locked until chapter {unlock_chapter}",
+        )
 
-    requested_chapter = chapter_index or character.first_chapter_index or 1
+    requested_chapter = chapter_index or unlock_chapter
     idempotency_key = f"portrait:{book_id}:{character_id}:{requested_chapter}"
     existing = db.execute(
         select(AssetJob).where(
@@ -593,6 +601,70 @@ def enqueue_visual_job(
     db.commit()
     db.refresh(job)
     return VisualJobCreateResponse(task_id=task.id, job_id=job.id, book_id=book_id, status=job.status)
+
+
+@router.post("/{book_id}/visual/portraits/bootstrap")
+def bootstrap_top_portraits(
+    book_id: str, limit: int = 5, db: Session = Depends(get_db)
+) -> dict[str, str | int]:
+    book = db.get(Book, book_id)
+    if not book:
+        raise HTTPException(status_code=404, detail="Book not found")
+
+    stmt = (
+        select(Character)
+        .where(Character.book_id == book_id, Character.is_verified.is_(True))
+        .order_by(Character.mention_count.desc(), Character.first_chapter_index.asc().nullslast(), Character.canonical_name.asc())
+        .limit(max(1, min(limit, 20)))
+    )
+    characters = list(db.execute(stmt).scalars().all())
+    enqueued = 0
+    stale_cutoff = datetime.now(timezone.utc) - timedelta(minutes=5)
+    for character in characters:
+        requested_chapter = character.first_chapter_index or 1
+        idempotency_key = f"portrait:{book_id}:{character.id}:{requested_chapter}"
+        existing = db.execute(
+            select(AssetJob).where(
+                AssetJob.book_id == book_id,
+                AssetJob.idempotency_key == idempotency_key,
+            )
+        ).scalars().first()
+        if existing and existing.status in {"queued", "running", "completed"}:
+            if existing.status == "completed":
+                continue
+            if existing.updated_at and existing.updated_at >= stale_cutoff:
+                continue
+
+        db.refresh(character, attribute_names=["card", "evidences"])
+        prompt = build_style_prompt(character)
+        if existing:
+            job = existing
+            job.asset_type = "portrait"
+            job.character_id = character.id
+            job.chapter_index = requested_chapter
+            job.style_prompt = prompt
+            job.status = "queued"
+            job.error_message = ""
+        else:
+            job = AssetJob(
+                book_id=book_id,
+                character_id=character.id,
+                asset_type="portrait",
+                chapter_index=requested_chapter,
+                style_prompt=prompt,
+                status="queued",
+                priority=5,
+                idempotency_key=idempotency_key,
+            )
+            db.add(job)
+        db.commit()
+        db.refresh(job)
+        task = generate_visual_asset_task.delay(job_id=job.id)
+        job.task_id = task.id
+        db.commit()
+        enqueued += 1
+
+    return {"book_id": book_id, "limit": limit, "enqueued": enqueued}
 
 
 @router.get("/{book_id}/visual/jobs/{job_id}", response_model=VisualJobStatusResponse)
